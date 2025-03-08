@@ -1,0 +1,73 @@
+.service-section {
+    padding: 20px;
+    text-align: center;
+  }
+  
+  .service-section h2 {
+    font-size: 24px;
+    margin-bottom: 20px;
+  }
+  
+  .service-cards {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: center;
+  }
+  
+  .service-card {
+    background: #ffffff;
+    border: 1px solid #f0f0f0;
+    border-radius: 10px;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    width: 280px;
+    overflow: hidden;
+    transition: transform 0.3s ease;
+  }
+  
+  .service-card:hover {
+    transform: translateY(-5px);
+  }
+  
+  .service-image {
+    width: 100%;
+    height: 150px;
+    object-fit: cover;
+    border-bottom: 1px solid #f0f0f0;
+  }
+  
+  .service-content {
+    padding: 15px;
+    text-align: left;
+  }
+  
+  .service-content h3 {
+    font-size: 18px;
+    margin-bottom: 10px;
+    color: #333333;
+  }
+  
+  .service-content ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    margin-bottom: 10px;
+  }
+  
+  .service-content ul li {
+    font-size: 14px;
+    color: #555555;
+  }
+  
+  .add-car-link {
+    color: #ff8c00;
+    font-weight: bold;
+    text-decoration: none;
+    display: inline-block;
+    margin-top: 10px;
+  }
+  
+  .add-car-link:hover {
+    text-decoration: underline;
+  }
+  

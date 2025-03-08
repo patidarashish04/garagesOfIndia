@@ -1,0 +1,89 @@
+/* Container */
+.garage-details-container {
+    max-width: 800px;
+    margin: 20px auto;
+    padding: 20px;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    background-color: #fff;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  }
+  
+  /* Header */
+  .garage-header {
+    text-align: center;
+    margin-bottom: 20px;
+  }
+  
+  .garage-header h1 {
+    font-size: 2rem;
+    font-weight: 600;
+    margin-bottom: 10px;
+  }
+  
+  .garage-header .address,
+  .garage-header .contact {
+    font-size: 1rem;
+    color: #555;
+  }
+  
+  /* Image */
+  .garage-image {
+    width: 100%;
+    height: auto;
+    border-radius: 10px;
+    margin-bottom: 20px;
+  }
+  
+  /* Details Section */
+  .details h3 {
+    font-size: 1.5rem;
+    font-weight: 600;
+    margin-bottom: 10px;
+  }
+  
+  .details ul {
+    list-style: none;
+    padding: 0;
+  }
+  
+  .details ul li {
+    font-size: 1rem;
+    margin-bottom: 5px;
+    color: #333;
+  }
+  
+  /* Footer */
+  .garage-footer {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+  }
+  
+  .garage-footer .btn {
+    font-size: 1rem;
+    padding: 10px 20px;
+    border-radius: 5px;
+    border: none;
+    cursor: pointer;
+  }
+  
+  .garage-footer .btn-success {
+    background-color: #28a745;
+    color: #fff;
+  }
+  
+  .garage-footer .btn-primary {
+    background-color: #007bff;
+    color: #fff;
+  }
+  
+  /* Loading and Error Messages */
+  .loading,
+  .error {
+    text-align: center;
+    font-size: 1.2rem;
+    color: #666;
+    margin-top: 20px;
+  }
+  

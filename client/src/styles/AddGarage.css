@@ -1,0 +1,22 @@
+.modal-content {
+    border-radius: 10px;
+  }
+  
+  .modal-header {
+    background-color: #007bff;
+    color: white;
+    border-radius: 10px 10px 0 0;
+  }
+  
+  .modal-title {
+    font-weight: bold;
+  }
+  
+  button {
+    border-radius: 5px;
+  }
+  
+  .form-control {
+    margin-bottom: 10px;
+  }
+  

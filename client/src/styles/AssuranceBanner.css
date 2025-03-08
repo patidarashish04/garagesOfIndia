@@ -1,0 +1,70 @@
+.assurance-banner {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    background-color: #fff9ee; /* Light cream background */
+    padding: 30px 400px;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    font-family: Arial, sans-serif;
+    width: 60%;
+    height: 120px;
+    
+  }
+  
+  .assurance-header {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+  }
+  
+  .shield-icon {
+    width: 50px;
+    height: 50px;
+    gap: 20px;
+  }
+  
+  .assurance-header h3 {
+    font-size: 18px;
+    font-weight: 600;
+    margin: 0;
+    color: #333;
+  }
+  
+  .assurance-header p {
+    font-size: 14px;
+    color: #666;
+    margin: 0;
+  }
+  
+  .assurance-features {
+    display: flex;
+    gap: 30px;
+  }
+  
+  .feature-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background: #fff;
+    padding: 15px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    width: 150px;
+  }
+  
+  .feature-item img {
+    width: 30px;
+    height: 30px;
+    margin-bottom: 10px;
+  }
+  
+  .feature-item p {
+    font-size: 14px;
+    color: #333;
+    text-align: center;
+    margin: 0;
+    font-size: bold;
+  }
+  

@@ -1,0 +1,46 @@
+version: '3.8'
+
+services:
+  frontend:
+    build:
+      context: .
+      dockerfile: Dockerfile.frontend
+    ports:
+      - "3000:3000" # Map frontend port
+    volumes:
+      - ./client:/app # Mount local code for live development
+    environment:
+      - NODE_ENV=production # Or development as needed
+
+
+  backend:
+    build:
+      context: .
+      dockerfile: Dockerfile.backend
+    ports:
+      - "9002:9002" # Map backend port
+    volumes:
+      - ./server:/app # Mount local code for live development
+    environment:
+      - NODE_ENV=production # Or development as needed
+      - MONGO_URI=mongodb://mongo:27017/rentalPGApp # Use the internal service name
+    depends_on:
+      - mongo # Ensure MongoDB starts before backend
+    networks:
+      - rentalPGApp-network  
+
+  mongo:
+    image: mongo
+    container_name: rentalPGApp-mongo
+    volumes:
+      - mongo-data:/data/db # Persist MongoDB data
+    networks:
+      - rentalPGApp-network
+      
+
+networks:
+  rentalPGApp-network:
+    driver: bridge
+
+volumes:
+  mongo-data:

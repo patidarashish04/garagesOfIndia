@@ -1,0 +1,37 @@
+/* styles.css */
+.brands-container {
+    text-align: center;
+    font-family: Arial, sans-serif;
+  }
+  
+  .tabs {
+    display: flex;
+    justify-content: center;
+    margin: 20px 0;
+  }
+  
+  .tab-btn {
+    padding: 10px 20px;
+    margin: 0 5px;
+    border: none;
+    background-color: #f0f0f0;
+    cursor: pointer;
+    border-radius: 5px;
+    font-size: 16px;
+  }
+  
+  .tab-btn.active {
+    background-color: #ffa500;
+    color: white;
+  }
+  
+  .brands-list ul {
+    list-style: none;
+    padding: 0;
+  }
+  
+  .brands-list li {
+    font-size: 18px;
+    margin: 5px 0;
+  }
+  

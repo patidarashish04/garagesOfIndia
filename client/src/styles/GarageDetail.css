@@ -1,0 +1,56 @@
+/* src/components/GarageDetail.css */
+
+/* Container styling */
+.container {
+    background-color: #f8f9fa;
+    padding: 2rem;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.05);
+  }
+  
+  /* Headings styling */
+  h1, h2, h3, h5 {
+    color: #343a40;
+  }
+  
+  /* Card styling */
+  .card {
+    margin-bottom: 1.5rem;
+    border: none;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+  .card-body {
+    background-color: #fff;
+  }
+  
+  /* Image styling */
+  .img-fluid {
+    border-radius: 10px;
+    transition: transform 0.3s ease;
+  }
+  
+  .img-fluid:hover {
+    transform: scale(1.05);
+  }
+  
+  /* Reviews */
+  .card-title {
+    font-weight: 600;
+    color: #007bff;
+  }
+  
+  .card-subtitle {
+    font-size: 0.9rem;
+    color: #6c757d;
+  }
+  
+  /* Map iframe styling */
+  .embed-responsive {
+    border: 1px solid #dee2e6;
+    border-radius: 10px;
+    overflow: hidden;
+  }
+  

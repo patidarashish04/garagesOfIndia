@@ -1,0 +1,115 @@
+/* Garage List Container */
+.garage-list-main {
+    padding: 20px;
+    display: flex;
+    flex-direction: row-reverse;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: center;
+  }
+
+  .garage-section {
+    padding: 20px;
+    text-align: center;
+  }
+  
+  .garage-section h1 {
+    font-size: 24px;
+    margin-bottom: 20px;
+  }
+  
+  /* Garage Card */
+  .garage-card {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    max-width: 700px;
+    width: 100%;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    overflow: hidden;
+    background-color: #fff;
+    transition: transform0.3s ease;
+  }
+
+  .garage-card:hover {
+    transform: translateY(-5px);
+  }
+  
+  .garage-card:hover {
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    cursor: pointer;
+  }
+  
+  /* Garage Image */
+  .garage-image {
+    height: 100%;
+    object-fit: cover;
+  }
+  
+  /* Card Title */
+  .card-title {
+    font-size: 1.5rem;
+    font-weight: 600;
+    margin-bottom: 10px;
+    color: #333;
+  }
+  
+  /* Services Container */
+  .services-container {
+    margin-top: 10px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+  
+  .service-item {
+    font-size: 0.9rem;
+    font-weight: 500;
+    padding: 5px 10px;
+    border-radius: 20px;
+    background-color: #f0f0f0;
+    color: #555;
+  }
+  
+  /* Actions Buttons */
+  .actions {
+    margin-top: 15px;
+  }
+  
+  .actions .btn {
+    font-size: 0.9rem;
+    padding: 8px 15px;
+    border-radius: 5px;
+  }
+  
+  .actions .btn-success {
+    background-color: #28a745;
+    border: none;
+  }
+  
+  .actions .btn-primary {
+    background-color: #007bff;
+    border: none;
+  }
+  
+  .actions .btn-info {
+    background-color: #17a2b8;
+    border: none;
+  }
+  
+  /* No Garages Message */
+  .no-garages {
+    text-align: center;
+    font-size: 1.2rem;
+    color: #666;
+  }
+  
+  /* Loading Message */
+  .loading {
+    text-align: center;
+    font-size: 1.2rem;
+    color: #666;
+    margin-top: 20px;
+  }
+  

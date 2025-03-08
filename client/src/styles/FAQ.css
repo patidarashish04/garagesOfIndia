@@ -1,0 +1,232 @@
+.faq-section {
+    padding: 3rem 0;
+    background-color: rgb(249 250 251);
+  }
+  
+  @media (min-width: 640px) {
+    .faq-section {
+      padding: 4rem 0;
+    }
+  }
+  
+  @media (min-width: 1024px) {
+    .faq-section {
+      padding: 5rem 0;
+    }
+  }
+  
+  @media (min-width: 1280px) {
+    .faq-section {
+      padding: 6rem 0;
+    }
+  }
+  
+  .faq-container {
+    max-width: 80rem;
+    margin: 0 auto;
+    padding: 0 1rem;
+  }
+  
+  @media (min-width: 640px) {
+    .faq-container {
+      padding: 0 1.5rem;
+    }
+  }
+  
+  @media (min-width: 1024px) {
+    .faq-container {
+      padding: 0 2rem;
+    }
+  }
+  
+  .faq-header {
+    max-width: 42rem;
+    margin: 0 auto;
+    text-align: center;
+  }
+  
+  .faq-title {
+    font-size: 1.875rem;
+    font-weight: 600;
+    line-height: 1.2;
+    color: rgb(17 24 39);
+  }
+  
+  @media (min-width: 640px) {
+    .faq-title {
+      font-size: 2.25rem;
+    }
+  }
+  
+  @media (min-width: 1024px) {
+    .faq-title {
+      font-size: 3rem;
+    }
+  }
+  
+  .faq-subtitle {
+    margin-top: 1rem;
+    font-size: 1rem;
+    line-height: 1.75;
+    color: rgb(75 85 99);
+  }
+  
+  @media (min-width: 1024px) {
+    .faq-subtitle {
+      font-size: 1.125rem;
+      margin-top: 1.5rem;
+      line-height: 2;
+    }
+  }
+  
+  .faq-list {
+    max-width: 64rem;
+    margin: 3rem auto 0;
+    border: 1px solid rgb(229 231 235);
+    border-radius: 0.75rem;
+    overflow: hidden;
+    background-color: white;
+  }
+  
+  @media (min-width: 640px) {
+    .faq-list {
+      margin-top: 4rem;
+    }
+  }
+  
+  .faq-item {
+    border-bottom: 1px solid rgb(229 231 235);
+  }
+  
+  .faq-item:last-child {
+    border-bottom: none;
+  }
+  
+  .faq-question {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    padding: 1.25rem 1.5rem;
+    font-size: 1.125rem;
+    font-weight: 600;
+    text-align: left;
+    color: rgb(17 24 39);
+    background: none;
+    border: none;
+    cursor: pointer;
+  }
+  
+  @media (min-width: 640px) {
+    .faq-question {
+      padding: 1.5rem;
+    }
+  }
+  
+  .faq-icon {
+    margin-left: 1rem;
+  }
+  
+  .icon {
+    width: 1.5rem;
+    height: 1.5rem;
+    color: rgb(17 24 39);
+  }
+  
+  .faq-answer {
+    padding: 0 1.5rem 1.5rem;
+  }
+  
+  .faq-answer p {
+    font-size: 1rem;
+    color: rgb(75 85 99);
+  }
+  
+  .contact-section {
+    max-width: 64rem;
+    margin: 2rem auto 0;
+    background-color: rgb(243 244 246);
+    border-radius: 0.75rem;
+    overflow: hidden;
+    text-align: center;
+  }
+  
+  @media (min-width: 640px) {
+    .contact-section {
+      margin-top: 3rem;
+    }
+  }
+  
+  .contact-content {
+    padding: 3rem 1.5rem;
+  }
+  
+  @media (min-width: 640px) {
+    .contact-content {
+      padding: 3rem;
+    }
+  }
+  
+  .avatar-group {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto;
+    max-width: 20rem;
+  }
+  
+  .avatar {
+    width: 3.5rem;
+    height: 3.5rem;
+    border-radius: 9999px;
+    border: 4px solid rgb(243 244 246);
+    margin: 0 -0.5rem;
+  }
+  
+  .avatar-center {
+    width: 4rem;
+    height: 4rem;
+    z-index: 10;
+  }
+  
+  .contact-title {
+    margin-top: 1.5rem;
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: rgb(17 24 39);
+  }
+  
+  .contact-text {
+    margin-top: 0.5rem;
+    font-size: 1rem;
+    color: rgb(75 85 99);
+  }
+  
+  .contact-action {
+    margin-top: 1.5rem;
+  }
+  
+  .contact-button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.75rem 1.5rem;
+    font-size: 1rem;
+    font-weight: 500;
+    color: white;
+    background-color: rgb(37 99 235);
+    border: 1px solid transparent;
+    border-radius: 9999px;
+    transition: all 200ms;
+    cursor: pointer;
+  }
+  
+  .contact-button:hover {
+    background-color: rgb(29 78 216);
+  }
+  
+  .contact-button:focus {
+    outline: none;
+    box-shadow: 0 0 0 2px rgb(255 255 255), 0 0 0 4px rgb(37 99 235);
+  }

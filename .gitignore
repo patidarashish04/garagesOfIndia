@@ -3,4 +3,3 @@ uploads/
 dev-data/
 *.env
 .vscode
-**/grocery*

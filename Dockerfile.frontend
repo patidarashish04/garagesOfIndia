@@ -1,0 +1,21 @@
+# Use Node.js image
+FROM node:18-alpine
+
+# Set working directory
+WORKDIR /app
+
+# Copy frontend code and install dependencies
+COPY client/package*.json ./
+RUN npm install
+
+# Copy the rest of the frontend code
+COPY client ./
+
+# Build the frontend
+RUN npm run build
+
+# Expose port 3000 for the frontend
+EXPOSE 3000
+
+# Start the development server (or production server if applicable)
+CMD ["npm", "start"]

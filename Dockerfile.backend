@@ -1,0 +1,21 @@
+# Use Node.js lightweight image
+FROM node:14-alpine
+
+# Set working directory inside the container
+WORKDIR /app
+
+# Copy backend package.json and package-lock.json (ensure correct path)
+COPY server/package*.json ./
+
+# Install backend dependencies
+RUN npm install
+
+# Copy the entire backend code into the container
+COPY server/ .
+
+# Expose the backend port
+EXPOSE 9002
+
+# Start the server using the correct command
+CMD ["npm", "start"]
+

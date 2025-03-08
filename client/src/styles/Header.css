@@ -1,0 +1,338 @@
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #fff;
+  padding: 15px 20px;
+  color: black;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  position: fixed;  /* Keeps the header fixed at the top */
+  top: 0;           /* Positions it at the top */
+  left: 0;          /* Aligns it to the left edge */
+  width: 100%;      /* Ensures it spans the full width */
+  z-index: 1000;    /* Ensures it stays above other content */
+  margin: 0;        /* Remove any default margin */
+}
+
+.header-left {
+  display: flex;
+  align-items: center;
+}
+
+body {
+  padding-top: 70px;  /* Creates space for the fixed header */
+}
+  .header-logo {
+    display: flex;
+    align-items: center;
+    margin-left: 300px;
+  }
+  
+  .header-logo img {
+    width: 50px;
+    height: 50px;
+    margin-right: 20px;
+  }
+  
+  .header-logo h1 {
+    font-size: 1.5rem;
+    color: #f7c045;
+  }
+  
+  .header-account {
+    position: relative;
+    display: flex;
+    align-items: center;
+    margin-right: 250px;
+  }
+
+/* .popup-button:hover {
+    background-color: #f7c045;
+    color: #2a2d34;
+  } */
+
+  .account-button {
+    background-color: #f7c045;
+    color: #2a2d34;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 5px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.3s;
+  }
+  
+  .account-button:hover {
+    background-color: #ffdd67;
+  }
+
+
+  .location {
+    display: flex;
+    align-items: center;
+    font-size: 14px;
+    color: #ff8c00; /* Cars24 orange color */
+  }
+  
+  .location span {
+    font-size: 18px;
+    margin-right: 5px;
+  }
+  
+  .location select {
+    margin-right: 5px;
+    padding: 5px;
+    border: 1px solid #ff8c00; /* Cars24 orange color */
+    border-radius: 5px;
+    background-color: white;
+    color: black; /* Dark text for dropdown */
+    font-weight: bold;
+  }
+  
+  .location select:focus {
+    outline: none;
+    box-shadow: 0 0 3px #ff8c00; /* Focus effect with Cars24 orange */
+  }
+  
+.registration-modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 2000;
+}
+
+.login-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 2000;
+  }
+
+.modal-content {
+  background: white;
+  padding: 20px;
+  border-radius: 8px;
+  position: relative;
+}
+
+.close-modal-button {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background: none;
+  border: none;
+  font-size: 1.5rem;
+  cursor: pointer;
+}
+
+.close-modal-button:hover {
+  color: red;
+}
+
+.header-center {
+  flex: 1; /* Center alignment with remaining space */
+  text-align: center;
+  margin-right: 150px;
+}
+
+.header-center ul {
+  display: inline-flex; /* Center the menu items horizontally */
+  gap: 20px;
+  list-style: none;
+  padding: 0;
+  margin-right: 1px;
+}
+
+.header-center ul li a {
+  text-decoration: none;
+  color: black;
+  font-size: 18px;
+  transition: color 0.3s;
+}
+
+.header-center ul li a:hover {
+  color: #ff8c00; /* Highlight color on hover */
+}
+
+.header-right {
+  display: flex;
+  align-items: center;
+  gap: 100px;
+}
+.location-button:hover {
+    background-color: #0056b3; /* Darker shade on hover */
+  }
+  
+  .location-icon {
+    margin-right: 6px; /* Add space between the icon and the city name */
+    font-size: 8px; /* Adjust icon size if needed */
+    color: hsl(44, 87%, 64%); /* Icon color (optional) */
+  }
+  
+  .arrow-icon {
+    margin-left: 5px; /* Space between icons */
+  }
+  
+  .location-icon i, .arrow-icon i {
+    font-size: 18px; /* Adjust size as needed */
+  }
+  
+ /* Responsive Styles */
+@media (max-width: 768px) {
+  .header {
+    flex-wrap: wrap;
+    padding: 10px;
+  }
+
+  .header-left {
+    width: 100%;
+    justify-content: space-between;
+  }
+
+  .header-right {
+    display: none; /* Hide Account button on smaller screens */
+  }
+
+  .hamburger {
+    display: block;
+    font-size: 24px;
+    cursor: pointer;
+    color: #fff;
+  }
+
+  /* Mobile Menu */
+  .header-menu {
+    display: none;
+    flex-direction: column;
+    background-color: #f4f5f7;
+    position: absolute;
+    top: 60px;
+    left: 0;
+    width: 100%;
+    padding: 20px;
+    z-index: 1000;
+  }
+
+  .header-menu.open {
+    display: flex;
+  }
+
+  .header-menu ul li {
+    margin-bottom: 10px;
+  }
+
+  .header-menu ul li a {
+    font-size: 16px;
+  }
+}
+
+.location-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 8px 16px;
+  background-color: white;
+  color: black;
+  border: 1px solid #d1d5db; /* Gray border */
+  border-radius: 6px; /* Rounded corners */
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+  margin-left: 30px;
+}
+
+.location-button:hover {
+  background-color: #f3f4f6; /* Light gray on hover */
+}
+
+.location-button span {
+  margin-left: 4px; /* Space between icon and text */
+  font-weight: 500; /* Medium font weight */
+}
+
+.location-button svg {
+  width: 16px;
+  height: 16px;
+}
+.location-text {
+  font-family: Arial, sans-serif; /* Or any bold-friendly font */
+  font-display: 900;
+}
+
+
+
+
+.account-info {
+  display: flex;
+  align-items: center;
+  position: relative;
+  cursor: pointer;
+  }
+
+.account-icon-container {
+  display: flex;
+  align-items: center;
+}
+
+.user-icon {
+  width: 24px;
+  height: 24px;
+  margin-right: 8px;
+}
+
+.account-text {
+  display: flex;
+  flex-direction: column;
+}
+
+.hello-message {
+  font-size: 14px;
+  color: #000;
+}
+
+.account-dropdown {
+  font-size: 12px;
+  color: black;
+  font-weight:900 /* Matches link-like dropdown color */
+}
+
+.account-popup {
+  position: absolute;
+  top: 100%;
+  right: 0;
+  background-color: #fff;
+  border: 1px solid #ddd;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  border-radius: 4px;
+  padding: 10px;
+  z-index: 1000;
+  display: flex;
+  flex-direction: column;
+}
+
+.popup-button {
+  background-color: #f90;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  padding: 8px 12px;
+  margin: 5px 0;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+.popup-button:hover {
+  background-color: #e68a00;
+}
