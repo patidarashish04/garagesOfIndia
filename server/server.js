@@ -12,7 +12,7 @@ const app = require('./app');
 // const DB ="mongodb://mongo:27018/rentalPGApp";
 const DB = "mongodb://localhost:27017/rentalPGApp";
 mongoose.connect(DB, { useNewUrlParser: true, useUnifiedTopology: true })
-  .then(() => console.log('✅==✅ MongoDB Connected!'))
+  .then(() => console.log('✅ MongoDB Connected!'))
   .catch(err => console.log('❌ MongoDB Connection Error:', err));
 
 const port = process.env.PORT || 9003;
