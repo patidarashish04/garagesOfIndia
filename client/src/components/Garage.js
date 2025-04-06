@@ -1,16 +1,16 @@
 // import React, { useState } from "react";
 // import '../styles/Garage.css';
 
-// const GarageForm = () => {
-//   const [garageData, setGarageData] = useState({
-//     name: "",
-//     description: "",
-//     location: "",
-//     rating: 0,
-//     contact: "",
-//     vehicleTypes: [],
-//     photos: [],
-//   });
+const GarageForm = () => {
+  const [garageData, setGarageData] = useState({
+    name: "",
+    description: "",
+    location: "",
+    rating: 0,
+    contact: "",
+    vehicleTypes: [],
+    photos: [],
+  });
 
 //   const handleInputChange = (e) => {
 //     const { name, value } = e.target;
