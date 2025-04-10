@@ -20,6 +20,7 @@ import GaragesCard from "../src/components/GarageCard"; // Update the path
 import GarageDetail from "../src/components/GarageDetail"; // Update the path
 import BlogPage from "../src/pages/BlogPage"; // Update the path
 import SearchResults from "../src/components/SearchResults"; // Update the path
+import GarageForm from "../src/components/Garage";
 
 
 
@@ -55,6 +56,7 @@ const App = () => {
         />
         {/* Contact Us Route */}
         <Route path="/contact" element={<ContactPage />} />
+        <Route path="/garageRegistration" element={<GarageForm />} />
         <Route path="/about" element={<AboutUs />} />
       <Route path="/admin" element={<Dashboard />} />
       <Route path="/search/:query" element={<SearchResults />} />
