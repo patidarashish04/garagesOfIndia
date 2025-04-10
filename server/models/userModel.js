@@ -6,19 +6,25 @@ const bcrypt = require('bcryptjs');
 const userSchema = new mongoose.Schema({
   name: {
     type: String,
-    required: [true, 'Please tell us your name!'],
+    required: [false, 'Please tell us your name!'],
   },
   email: {
     type: String,
-    required: [true, 'Please provide your email'],
-    unique: true,
-    lowercase: true,
-    validate: [validator.isEmail, 'Please provide a valid email'],
+    required: [false, 'Please provide your email'],
+    // unique: true,
+    // lowercase: true,
+    // sparse: true,
+    // validate: [validator.isEmail, 'Please provide a valid email'],
   },
-  phoneNo: {
+  phone: {
     type: String,
-    minlength: [10, 'Please provide a valid 10-digit phone number'],
-    maxlength: [10, 'Please provide a valid 10-digit phone number'],
+    unique: false,
+  },
+  otp: String,
+  otpExpires: Date,
+  isVerified: {
+    type: Boolean,
+    default: false,
   },
   photo: { type: String, default: 'user-avatar.jpg' },
   gender: {
@@ -46,7 +52,7 @@ const userSchema = new mongoose.Schema({
   },
   password: {
     type: String,
-    required: [true, 'Please provide a password'],
+    required: [false, 'Please provide a password'],
     minlength: 5,
     select: false,
   },

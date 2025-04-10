@@ -17,4 +17,19 @@ const sendWhatsAppMessage = async (to, message) => {
   }
 };
 
-module.exports = { sendWhatsAppMessage };
+const sendOTP = async (phone, otp) => {
+  console.log('================>>>>>>>.', phone, otp)
+  try {
+    await client.messages.create({
+      body: `Your OTP is ${otp}. It is valid for ${process.env.OTP_EXPIRY} minutes.`,
+      from: process.env.TWILIO_PHONE_NUMBER,
+      to: phone,
+    });
+    return { success: true };
+  } catch (error) {
+    console.error("Twilio Error:", error);
+    return { success: false, error };
+  }
+};
+
+module.exports = { sendWhatsAppMessage , sendOTP };

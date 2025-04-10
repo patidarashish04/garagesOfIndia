@@ -167,7 +167,7 @@ exports.findGarages = (Model) =>
             near: userLocation,
             distanceField: "distance",
             spherical: true,
-            maxDistance: 1000000, // 10km radius
+            maxDistance: 10000, // 10km radius
           },
         },
         { $sort: { distance: 1 } }, // Nearest first
