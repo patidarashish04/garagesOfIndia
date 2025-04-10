@@ -31,6 +31,7 @@ if (process.env.NODE_ENV === 'development') {
 
 //Set security HTTP headers
 app.use(helmet());
+app.use(express.urlencoded({ extended: true }));
 
 //Implement CORS
 app.use(cors());

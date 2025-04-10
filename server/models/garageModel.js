@@ -3,11 +3,11 @@ const mongoose = require('mongoose');
 const garageSchema = new mongoose.Schema({
   name: {
     type: String,
-    required: [false, 'Garage must have a name!'],
+    required: [false, 'Garage must have a name!'],   //  garage Name
   },
   address: {
     type: String,
-    required: [false, 'Garage must have an address!'],
+    required: [false, 'Garage must have an address!'],  // all garage services
   },
   photos: {
     type: [String],
@@ -17,26 +17,25 @@ const garageSchema = new mongoose.Schema({
     type: [String],
     enum: ["Car", "Bike"],
     required: true
-  },
+  },     //  garage vechicle type
   description: {
     type: String,
     required: false
   },
-  services: [{ name: String, price: Number }],
+  services: [{ name: String, price: Number }],  // all garage services 
   verified: { type: Boolean },
   location: {
-    type: {
-      type: String,
-      default: 'Point',
-    },
-    coordinates: {
-      type: [Number],
-      required: [false, 'Garage must have coordinates!'], // [longitude, latitude]
+    type: { type: String, enum: ["Point"], required: false },
+    coordinates: { type: [Number], required: [false, 'Garage must have coordinates!'], // [longitude, latitude]
     },
   },
   contact: {
     type: String,
-    required: [false, 'Garage must have a contact number!'],
+    required: [false, 'Garage must have a contact number!'],  // Owner's WhatsApp number for message
+  },
+  alternateNumber: {
+    type: String,
+    required: [false, 'Garage must have a alternate contact number!'],  // Owner's Alternate number
   },
   reviews: [
     {
@@ -59,6 +58,9 @@ const garageSchema = new mongoose.Schema({
     },
   ],
 });
+
+// Create a 2dsphere index for geospatial queries
+garageSchema.index({ location: "2dsphere" });
 
 garageSchema.pre(/^find/, function (next) {
   this.populate({
