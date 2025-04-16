@@ -21,6 +21,7 @@ import GarageDetail from "../src/components/GarageDetail"; // Update the path
 import BlogPage from "../src/pages/BlogPage"; // Update the path
 import SearchResults from "../src/components/SearchResults"; // Update the path
 import GarageForm from "../src/components/Garage";
+import GarageList from "./components/GarageList";
 
 
 
@@ -63,6 +64,7 @@ const App = () => {
         <Route path="/admin/garages" element={<GaragesPage />} />
         <Route path="/garages/:id" element={<GarageDetail />} />
         <Route path="/admin/blogs" element={<BlogPage />} />
+        <Route path="/garageList" element={<GarageList />} />
         {/* <Route path="/admin/users" element={<ManageUsers />} /> */}
         {/* Add more admin routes */}
       </Routes>
