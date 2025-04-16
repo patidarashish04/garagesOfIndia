@@ -104,14 +104,20 @@ form {
   }
 
 
-  /* CSS for +91 */
- 
   .contact-wrapper {
     margin-bottom: 1em;
   }
   
+  .contact-row {
+    display: flex;
+    align-items: center;
+    gap: 1em; /* spacing between input box and button */
+    margin-top: 0.5em;
+  }
+  
   .contact-input-box {
     display: flex;
+  
     align-items: center;
     border: 1px solid #ccc;
     border-radius: 5px;
@@ -127,26 +133,35 @@ form {
   }
   
   .contact-input-box input {
+    
     border: none;
     outline: none;
     padding: 0.5em;
-    width: 150px;
+    width: 500px;
   }
 
-   /* CSS for otp */
-
-  .verify-btn {
-    margin-top: 0.5em;
+  
+  .Get-Otp-btn {
     padding: 6px 12px;
     background-color: #4caf50;
     color: white;
     border: none;
     border-radius: 4px;
     cursor: pointer;
+    height: 38px; 
+    width: fit-content;/* to match input height */
   }
   
+  /* Optional: disable look */
+  .Get-Otp-btn:disabled {
+    background-color: #aaa;
+    cursor: not-allowed;
+  }
+  
+  /* OTP styles */
   .otp-box {
     display: flex;
+    align-items: center;
     gap: 10px;
     margin-top: 1em;
   }
@@ -159,4 +174,31 @@ form {
     border: 1px solid #ccc;
     border-radius: 5px;
   }
+  .Get-Otp-btn.verify-otp-btn {
+  margin-top: 10px;
+  padding: 6px 12px;
+  background-color: #4caf50;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+.verify-otp-btn:hover {
+  background-color: #45a049;
+}
+
+/* // for otp verify */
+.verify-otp-btn {
+  margin-top: 10px;
+  padding: 1px 3px;
+  background-color: #4caf50;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+.verify-otp-btn:hover {
+  background-color: #45a049;
+}
+
   

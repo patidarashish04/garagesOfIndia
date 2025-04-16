@@ -20,6 +20,8 @@ import GaragesCard from "../src/components/GarageCard"; // Update the path
 import GarageDetail from "../src/components/GarageDetail"; // Update the path
 import BlogPage from "../src/pages/BlogPage"; // Update the path
 import SearchResults from "../src/components/SearchResults"; // Update the path
+import LoginForm from "./components/UserLogin";
+
 
 
 
@@ -30,6 +32,7 @@ import SearchResults from "../src/components/SearchResults"; // Update the path
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap-icons/font/bootstrap-icons.css';
 import GarageForm from "./components/Garage";
+import Login from "./pages/Login";
 
 const App = () => {
   return (
@@ -52,9 +55,12 @@ const App = () => {
              { /* <Garages />   to create garage */}
               {/* <FAQ /> */}
             </>
-          }
+          } 
         />
         {/* Contact Us Route */}
+
+        <Route path="/UserLogin" element={<LoginForm/>} />
+        <Route path="/" element={<Header/>} />
         <Route path="/GarageRegistration" element={<GarageForm/>} />
         <Route path="/contact" element={<ContactPage />} />
         <Route path="/about" element={<AboutUs />} />
