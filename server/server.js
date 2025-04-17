@@ -9,9 +9,9 @@ const app = require('./app');
 // DATABASE_LOCAL=mongodb://localhost:27017/rentalPGApp
 // const DB = process.env.DATABASE_LOCAL || "mongodb://localhost:27018/rentalPGApp";
 // const DB = process.env.DATABASE.replace('<PASSWORD>', process.env.DATABASE_PASSWORD);
-// const DB ="mongodb://mongo:27018/rentalPGApp";
-const DB = "mongodb://localhost:27017/rentalPGApp";
-mongoose.connect(DB, { useNewUrlParser: true, useUnifiedTopology: true })
+// const MONGO_URL ="mongodb://mongo:27017/rentalPGApp";
+// const DB = "mongodb://localhost:27017/rentalPGApp";
+mongoose.connect(process.env.MONGO_URL, { useNewUrlParser: true, useUnifiedTopology: true, connectTimeoutMS: 10000 })
   .then(() => console.log('✅ MongoDB Connected!'))
   .catch(err => console.log('❌ MongoDB Connection Error:', err));
 

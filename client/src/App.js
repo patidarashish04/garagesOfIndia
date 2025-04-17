@@ -15,7 +15,7 @@ import FAQ from "./components/FAQ";
 import ContactPage from "../src/pages/ContactSection";
 import AboutUs from "../src/pages/AboutUs"; // Update the path
 import GaragesPage from "../src/pages/GaragesPage"; // Update the path
-import Garages from "../src/components/Garage"; // Update the path
+
 import GaragesCard from "../src/components/GarageCard"; // Update the path
 import GarageDetail from "../src/components/GarageDetail"; // Update the path
 import BlogPage from "../src/pages/BlogPage"; // Update the path
@@ -31,6 +31,7 @@ import GarageList from "./components/GarageList";
 
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap-icons/font/bootstrap-icons.css';
+import GarageForm from "./components/Garage";
 
 const App = () => {
   return (
@@ -56,11 +57,12 @@ const App = () => {
           }
         />
         {/* Contact Us Route */}
+        <Route path="/GarageRegistration" element={<GarageForm/>} />
         <Route path="/contact" element={<ContactPage />} />
         <Route path="/garageRegistration" element={<GarageForm />} />
         <Route path="/about" element={<AboutUs />} />
-      <Route path="/admin" element={<Dashboard />} />
-      <Route path="/search/:query" element={<SearchResults />} />
+        <Route path="/admin" element={<Dashboard />} />
+        <Route path="/search/:query" element={<SearchResults />} />
         <Route path="/admin/garages" element={<GaragesPage />} />
         <Route path="/garages/:id" element={<GarageDetail />} />
         <Route path="/admin/blogs" element={<BlogPage />} />

@@ -4,10 +4,10 @@ import Register from '../pages/Register';
 import Login from '../pages/Login';
 import userIcon from '../assets/profile-user.png';
 import garageIcon from '../assets/garage-icon.png';
-import menuIcon from '../assets/ic_hamburger.svg';
 import LocationSelector from "../components/LocationSelector";
 import LocationModal from "../components/LocationSelector";
 import { FaMapMarkerAlt } from "react-icons/fa";
+
 // import { Navbar, Nav, Container, Button, Form, FormControl } from "react-bootstrap";
 
 
@@ -53,6 +53,17 @@ const Header = () => {
     setIsPopupVisible(false);
   };
 
+   
+    
+  
+
+  const handleClick = () => {
+   window.location.href =  "/GarageRegistration"
+  };
+
+
+    // const [isGaragesFormOpen, setIsGaragesFormOpen] = useState(false);
+
   const openLogin = () => {
     setIsLoginVisible(true);
     setIsRegistrationVisible(false);
@@ -77,10 +88,6 @@ const Header = () => {
   const togglePopup = () => {
     setIsPopupVisible((prev) => !prev);
   };
-  
-  const handleClick =()=>{
-    window.location.href="/garageRegistration"
-  }
 
   return (
     <header className="header">
@@ -88,8 +95,14 @@ const Header = () => {
       <div className="header-logo">
         <img src={garageIcon} alt="Garage Icon" />
         <h1>Garage Of India</h1>
-        <button onClick={handleClick}>Garage Registration</button>
-        
+        <button onClick = {handleClick}>Go to Garage</button>
+
+        {/* {isGaragesFormOpen && (
+        <div className="garages-modal">
+          <button className="close-button" onClick={() => setIsGaragesFormOpen(false)}>Close</button>
+          <Garages />
+        </div>
+      )} */}
       </div>
 
       {/* Location Selector */}
