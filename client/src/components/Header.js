@@ -4,6 +4,7 @@ import Register from '../pages/Register';
 import Login from '../pages/Login';
 import userIcon from '../assets/profile-user.png';
 import garageIcon from '../assets/garage-icon.png';
+import menuIcon from '../assets/ic_hamburger.svg';
 import LocationSelector from "../components/LocationSelector";
 import LocationModal from "../components/LocationSelector";
 import { FaMapMarkerAlt } from "react-icons/fa";
@@ -89,6 +90,10 @@ const handleUserLogin = () =>{
   const togglePopup = () => {
     setIsPopupVisible((prev) => !prev);
   };
+  
+  const handleClick =()=>{
+    window.location.href="/garageRegistration"
+  }
 
   return (
     <header className="header">

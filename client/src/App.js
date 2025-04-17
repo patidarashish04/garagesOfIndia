@@ -22,6 +22,8 @@ import BlogPage from "../src/pages/BlogPage"; // Update the path
 import SearchResults from "../src/components/SearchResults"; // Update the path
 import LoginForm from "./components/UserLogin";
 
+import GarageForm from "../src/components/Garage";
+import GarageList from "./components/GarageList";
 
 
 
@@ -63,12 +65,14 @@ const App = () => {
         <Route path="/" element={<Header/>} />
         <Route path="/GarageRegistration" element={<GarageForm/>} />
         <Route path="/contact" element={<ContactPage />} />
+        <Route path="/garageRegistration" element={<GarageForm />} />
         <Route path="/about" element={<AboutUs />} />
         <Route path="/admin" element={<Dashboard />} />
         <Route path="/search/:query" element={<SearchResults />} />
         <Route path="/admin/garages" element={<GaragesPage />} />
         <Route path="/garages/:id" element={<GarageDetail />} />
         <Route path="/admin/blogs" element={<BlogPage />} />
+        <Route path="/garageList" element={<GarageList />} />
         {/* <Route path="/admin/users" element={<ManageUsers />} /> */}
         {/* Add more admin routes */}
       </Routes>
