@@ -37,32 +37,32 @@ const createSendToken = (user, statusCode, res) => {
 };
 
 exports.signup = catchAsync(async (req, res, next) => {
-  const { name, email, password } = req.body;
-  if (!name || !email || !password) {
-    return res.status(400).json({
-      status: 'fail',
-      message: 'Name, email, and password are required.',
-    });
-  }
+  // const { name, email, password } = req.body;
+  // if (!name || !email || !password) {
+  //   return res.status(400).json({
+  //     status: 'fail',
+  //     message: 'Name, email, and password are required.',
+  //   });
+  // }
   // Check if user with the given email already exists
-  const existingUser = await User.findOne({ email });
-  if (existingUser) {
-    return res.status(409).json({
-      status: 'fail',
-      message: 'Email already exists.',
-    });
-  }
+  // const existingUser = await User.findOne({ email });
+  // if (existingUser) {
+  //   return res.status(409).json({
+  //     status: 'fail',
+  //     message: 'Email already exists.',
+  //   });
+  // }
   // const user =Object.keys(req.body).filter(field=>field!=='role');
   const newUser = await User.create({
     name: req.body.name,
-    email: req.body.email,
-    // phone: req.body.phone,
+    // email: req.body.email,
+    phone: req.body.phone,
     // gender: req.body.gender,
     // dob: req.body.dob,
     // photo: req.body.photo,
     // occupation: req.body.occupation,
     // address: req.body.address,
-    password: req.body.password,
+    // password: req.body.password,
     // passwordConfirm: req.body.passwordConfirm,
   });
   createSendToken(newUser, 201, res);
@@ -72,9 +72,9 @@ exports.login = catchAsync(async (req, res, next) => {
   const { email, password } = req.body;
 
   // 1) Check if email and password exist
-  if (!email || !password) {
-    return next(new AppError('Please provide email and password!', 400));
-  }
+  // if (!email || !password) {
+  //   return next(new AppError('Please provide email and password!', 400));
+  // }
   // 2) Check if user exists && password is correct
   const user = await User.findOne({ email }).select('+password');
 
