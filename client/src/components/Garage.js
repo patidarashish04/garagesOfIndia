@@ -1,6 +1,8 @@
 import React, { useState,useEffect,useRef } from "react";
 import '../styles/Garage.css';
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
+
 
 const GarageForm = () => {
   const [garageData, setGarageData] = useState({
@@ -13,14 +15,18 @@ const GarageForm = () => {
     photos: [],
     latitude:"",
     longitude:""
+
   });
 
   const [userLocation, setUserLocation] = useState(null);
   const [errors, setErrors] = useState({});
+  //otp button for one click only
+  const [isOtpVerified, setIsOtpVerified] = useState(false);
+  const navigate = useNavigate();
 
   //for otp
   const [isVerifying, setIsVerifying] = useState(false);
-  const [otp, setOtp] = useState(["", "", "", ""]);
+  const [otp, setOtp] = useState(["", "", "", "", ""]);
   const inputRefs = useRef([]);
   useEffect(()=>{
     if(inputRefs.current[0]){
@@ -115,7 +121,8 @@ const GarageForm = () => {
           formData.append("description", garageData.description);
           formData.append("location", garageData.location);
           formData.append("rating", garageData.rating);
-          formData.append("contact", garageData.contact);
+          // formData.append("contact", garageData.contact);
+          formData.append("contact", `+91${garageData.contact}`);
           formData.append("latitude", latitude);
           formData.append("longitude", longitude);
   
@@ -138,6 +145,8 @@ const GarageForm = () => {
               });
               console.log("Garage created successfully:", response.data);
               alert("Garage added successfully!");
+              navigate("/");
+              
             } catch (error) {
               console.error("Error creating garage:", error);
               alert("Failed to add garage.");
@@ -183,7 +192,7 @@ const GarageForm = () => {
     setOtp(newOtp);
   
     // Move to next box if digit entered
-    if (value && index < 3 && inputRefs.current[index+1]) {
+    if (value && index < 4 && inputRefs.current[index+1]) {
       // const nextInput = document.querySelector(`#otp-input-${index + 1}`);
       // if (nextInput) nextInput.focus();
 
@@ -198,6 +207,57 @@ const GarageForm = () => {
       inputRefs.current[index-1].focus()
     }
   };
+
+  //for verifying the otp
+
+   const handleVerifyClick = async() =>{
+  console.log("Verify button clicked");
+  try{
+    const response = await axios.post("http://localhost:9002/api/users/request-otp", {
+      phone: `+91${garageData.contact}`
+    });
+    if (response.status === 200) {
+      console.log("OTP sent successfully:", response.data);
+      alert("OTP sent successfully!");
+      setIsVerifying(true);
+    } else {
+      alert("Failed to send OTP. Please try again.");
+      console.error("Failed to send OTP:", response.data);
+    }
+  } catch (error) {
+    console.error("Error sending OTP:", error);
+    alert("Something went wrong while sending OTP.");
+  }
+  };
+
+  const handleOtpVerify = async () => {
+  const enteredOtp = otp.join(""); // Join the array to get full OTP
+
+  if (enteredOtp.length !== 5) {
+    alert("Please enter the complete 5-digit OTP.");
+    return;
+  }
+
+  try {
+    const response = await axios.post("http://localhost:9002/api/users/verify-otp", {
+      phone: `+91${garageData.contact}`,
+      otp: enteredOtp
+    });
+
+    if (response.status === 200) {
+      alert("OTP verified successfully!");
+      console.log("OTP verified:", response.data);
+      setIsOtpVerified(true);
+      setIsVerifying(false);
+    } else {
+      alert("OTP verification failed.");
+    }
+  } catch (error) {
+    console.error("Error verifying OTP:", error);
+    alert("Something went wrong while verifying OTP.");
+  }
+  };
+
 
   return (
     <form onSubmit={handleSubmit}>
@@ -259,26 +319,70 @@ const GarageForm = () => {
       </div> */}
 
 
-<div className="contact-wrapper">
+ <div className="contact-wrapper">
   <label>Contact:</label>
-  <div className="contact-input-box">
-    <span className="country-code">+91</span>
-    <input
-      type="text"
-      name="contact"
-      value={garageData.contact}
-      onChange={(e) => {
-        const value = e.target.value;
-        if (/^\d{0,10}$/.test(value)) {
-          setGarageData({ ...garageData, contact: value });
-        }
-      }}
-    />
+
+  <div className="contact-row">
+    <div className="contact-input-box">
+      <span className="country-code">+91</span>
+      <input
+        type="text"
+        name="contact"
+        value={garageData.contact}
+        placeholder="Enter mobile number"
+        disabled={isOtpVerified}
+        onChange={(e) => {
+          const value = e.target.value;
+          if (/^\d{0,10}$/.test(value)) {
+            setGarageData({ ...garageData, contact: value });
+          }
+        }}
+      />
+    </div>
+
+
+   
+
+    
+    <button
+      type="button"
+      onClick={handleVerifyClick}
+      className="Get-Otp-btn"
+      disabled={garageData.contact.length !== 10 || isOtpVerified}
+    >
+      Get OTP
+    </button>
+  </div>
+
+  {isVerifying && (
+    <div className="otp-box">
+      <span>Enter OTP</span>
+      {otp.map((digit, index) => (
+        <input
+          key={index}
+          type="text"
+          ref={(input) => (inputRefs.current[index] = input)}
+          maxLength="1"
+          value={digit}
+          onChange={(e) => handleOtpChange(e, index)}
+          onKeyDown={(e) => handleOtpKeyDown(e, index)}
+        />
+      ))}
+      <button type="button" className="verify-otp-btn" onClick={handleOtpVerify}>
+        Verify OTP
+      </button>
+    </div>
+  )}
   </div>
   {errors.contact && <span className="error">{errors.contact}</span>}
 
-  <button type="button" onClick={() => setIsVerifying(true) } className="verify-btn"  disabled={garageData.contact.length !== 10}>
-    Verify Number
+  
+
+
+
+      
+  {/* <button type="button"  onClick={handleVerifyClick} className="verify-btn"  disabled={garageData.contact.length !== 10}>
+    Get OTP
   </button>
   {isVerifying && (
     <div className="otp-box">
@@ -293,10 +397,10 @@ const GarageForm = () => {
           onChange={(e) => handleOtpChange(e, index)}
           onKeyDown={(e) => handleOtpKeyDown(e, index)}
         />
-      ))}
+      ))} 
     </div>
-  )}
-</div>
+  )} */}
+
 
       <div>
         <label>Vehicle Types:</label><br />
@@ -331,6 +435,9 @@ const GarageForm = () => {
         />
         {errors.photos && <span className="error">{errors.photos}</span>}
       </div>
+
+     
+
 
       <button type="submit">Add Garage</button>
       <br />

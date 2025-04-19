@@ -54,8 +54,9 @@ const Header = () => {
   };
 
    
-    
-  
+const handleUserLogin = () =>{
+  window.location.href = "/UserLogin"
+};
 
   const handleClick = () => {
    window.location.href =  "/GarageRegistration"
@@ -95,7 +96,9 @@ const Header = () => {
       <div className="header-logo">
         <img src={garageIcon} alt="Garage Icon" />
         <h1>Garage Of India</h1>
-        <button onClick = {handleClick}>Go to Garage</button>
+        <button onClick = {handleClick}>Garage Registration</button>
+        <button onClick = {handleUserLogin}> Login</button>
+        
 
         {/* {isGaragesFormOpen && (
         <div className="garages-modal">
