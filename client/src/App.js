@@ -33,7 +33,6 @@ import GarageList from "./components/GarageList";
 
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap-icons/font/bootstrap-icons.css';
-import GarageForm from "./components/Garage";
 import Login from "./pages/Login";
 
 const App = () => {

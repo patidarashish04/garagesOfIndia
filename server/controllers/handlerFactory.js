@@ -137,15 +137,20 @@ exports.geocodeCity = (Model) =>
 exports.findGarages = (Model) =>
   catchAsync(async (req, res, next) => {
     try {
-      const { latitude, longitude } = req.query;
+      let { latitude, longitude } = req.query;
 
       // Validate query parameters
+      // if (!latitude || !longitude) {
+      //   return res.status(400).json({ 
+      //     success: false, 
+      //     message: "Latitude and Longitude are required!" 
+      //   });
+      // }
       if (!latitude || !longitude) {
-        return res.status(400).json({ 
-          success: false, 
-          message: "Latitude and Longitude are required!" 
-        });
-      }
+        //bangalore location as default is locaiton not provided
+        latitude = "12.9716";
+        longitude = "77.5946";
+      }
       const lat = parseFloat(latitude);
       const lng = parseFloat(longitude);
       // Validate if lat/lng are valid numbers
