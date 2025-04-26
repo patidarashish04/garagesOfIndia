@@ -1,0 +1,85 @@
+/* General body styling */
+body {
+    background-color: #f5f7fa;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    margin: 0;
+    padding: 0;
+    text-align: center;
+}
+
+
+/* Form */
+form {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    box-sizing: border-box;
+}
+
+/* Labels */
+label {
+    font-size: 15px;
+    margin: 10px 0 5px;
+    text-align: left;
+    color: #444;
+    font-weight: 600;
+}
+
+/* Inputs: text, email, etc. */
+input[type="text"],
+input[type="email"] {
+    width: 100%;
+    padding: 10px 12px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    font-size: 14px;
+    margin-bottom: 10px;
+    outline: none;
+    transition: border 0.2s;
+    box-sizing: border-box;
+}
+
+/* Focus effect */
+input[type="text"]:focus,
+input[type="email"]:focus {
+    border-color: #007bff;
+}
+
+/* Radio buttons container */
+.radio-group {
+    text-align: left;
+    margin-bottom: 15px;
+}
+
+/* Radio labels */
+.radio-group > label {
+    font-weight: normal;
+    margin-right: 20px;
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+}
+
+/* Radio input styling */
+input[type="radio"] {
+    margin-right: 5px;
+    transform: scale(1.1);
+}
+
+/* Submit button */
+button[type="submit"] {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 12px;
+    border-radius: 6px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.2s;
+    margin-top: 20px;
+}
+
+/* Submit button hover */
+button[type="submit"]:hover {
+    background-color: #0056b3;
+}
