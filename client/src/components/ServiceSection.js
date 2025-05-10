@@ -18,7 +18,7 @@ function ServiceSection() {
                 ))}
               </ul>
               <a href="/add-car" className="add-car-link">
-                Add car →
+                More Detail.. →
               </a>
             </div>
           </div>

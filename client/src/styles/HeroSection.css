@@ -9,7 +9,7 @@
   .hero-content h1 {
     font-size: 2.5rem;
     font-weight: bold;
-    margin: 0;
+    margin: 50px;
   }
   
   .hero-content .highlight {
@@ -55,31 +55,33 @@
   }
   
   /* Search Bar */
-  .search-bar {
+  .garage-search-bar {
     display: flex;
     justify-content: center;
     margin-top: 20px;
   }
   
-  .search-bar .search-input {
+  .garage-search-bar .search-input {
     width: 70%;
     padding: 10px;
     border: 1px solid #ddd;
     border-radius: 5px 0 0 5px;
   }
   
-  .search-bar .btn-primary {
+  .garage-search-bar .btn-primary {
     background-color: #ff7900;
-    color: white;
+    color: rgb(8, 7, 7);
     padding: 10px 20px;
     border: none;
     border-radius: 0 5px 5px 0;
     font-size: 0.9rem;
+    font-weight: bold;
+    margin-left:  5px;;
     cursor: pointer;
     transition: background-color 0.3s ease;
   }
   
-  .search-bar .btn-primary:hover {
+  .garage-search-bar .btn-primary:hover {
     background-color: #e66f00;
   }
   
