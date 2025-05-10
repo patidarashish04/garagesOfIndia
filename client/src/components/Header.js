@@ -20,6 +20,7 @@ const Header = () => {
   const [isLocationModalOpen, setIsLocationModalOpen] = useState(false);
   const [currentCity, setCurrentCity] = useState("Bangalore");
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isRoleModalVisible, setIsRoleModalVisible] = useState(false);
 
 
   const popupRef = useRef(null);
@@ -48,22 +49,23 @@ const Header = () => {
   const handleMouseLeave = () => setIsPopupVisible(false);
 
   const openRegistration = () => {
-    setIsRegistrationVisible(true);
+    // setIsRegistrationVisible(true);
     setIsLoginVisible(false);
     setIsPopupVisible(false);
+    setIsRoleModalVisible(true); // Open Role Selection Modal
   };
 
-   
-const handleUserLogin = () =>{
-  window.location.href = "/UserLogin"
-};
+
+  const handleUserLogin = () => {
+    window.location.href = "/UserLogin"
+  };
 
   const handleClick = () => {
-   window.location.href =  "/GarageRegistration"
+    window.location.href = "/GarageRegistration"
   };
 
 
-    // const [isGaragesFormOpen, setIsGaragesFormOpen] = useState(false);
+  // const [isGaragesFormOpen, setIsGaragesFormOpen] = useState(false);
 
   const openLogin = () => {
     setIsLoginVisible(true);
@@ -96,9 +98,9 @@ const handleUserLogin = () =>{
       <div className="header-logo">
         <img src={garageIcon} alt="Garage Icon" />
         <h1>Garage Of India</h1>
-        <button onClick = {handleClick}>Garage Registration</button>
-        <button onClick = {handleUserLogin}> Login</button>
-        
+        {/* <button onClick={handleClick}>Garage Registration</button>
+        <button onClick={handleUserLogin}> Login</button> */}
+
 
         {/* {isGaragesFormOpen && (
         <div className="garages-modal">
@@ -152,39 +154,39 @@ const handleUserLogin = () =>{
         onMouseEnter={handleMouseEnter}
         onMouseLeave={handleMouseLeave}
       >
-      <div className="account-info" ref={popupRef}>
-      <div className="account-icon-container" onClick={togglePopup}>
-        <img src={userIcon} alt="User Icon" className="user-icon" />
-        <div className="account-text">
-          {user ? (
-            <>
-              <span className="hello-message">Hello, {user.name}</span>
-              <span className="account-dropdown">Account ▼</span>
-            </>
-          ) : (
-            <>
-              <span className="hello-message">Hello, Sign In</span>
-              <span className="account-dropdown">Account ▼</span>
-            </>
-          )}
-        </div>
-      </div>
+        <div className="account-info" ref={popupRef}>
+          <div className="account-icon-container" onClick={togglePopup}>
+            <img src={userIcon} alt="User Icon" className="user-icon" />
+            <div className="account-text">
+              {user ? (
+                <>
+                  <span className="hello-message">Hello, {user.name || 'User'}</span>
+                  <span className="account-dropdown">Account ▼</span>
+                </>
+              ) : (
+                <>
+                  <span className="hello-message">Hello, Sign In</span>
+                  <span className="account-dropdown">Account ▼</span>
+                </>
+              )}
+            </div>
+          </div>
 
-      {isPopupVisible && (
-        <div className="account-popup">
-          {user ? (
-            <>
-              <button onClick={handleLogout} className="popup-button">Logout</button>
-            </>
-          ) : (
-            <>
-              <button onClick={openLogin} className="popup-button">Log In</button>
-              <button onClick={openRegistration} className="popup-button">Sign Up</button>
-            </>
+          {isPopupVisible && (
+            <div className="account-popup">
+              {user ? (
+                <>
+                  <button onClick={handleLogout} className="popup-button">Logout</button>
+                </>
+              ) : (
+                <>
+                  <button onClick={openLogin} className="popup-button">Log In</button>
+                  <button onClick={openRegistration} className="popup-button">Sign Up</button>
+                </>
+              )}
+            </div>
           )}
         </div>
-      )}
-    </div>
 
       </div>
 
@@ -200,14 +202,41 @@ const handleUserLogin = () =>{
         </div>
       )}
 
+      {/* Role Selection Modal */}
+      {isRoleModalVisible && (
+        <div className="role-modal">
+          <div className="modal-content">
+            <button onClick={() => setIsRoleModalVisible(false)} className="close-modal-button">&times;</button>
+            <h3>Register as:</h3>
+            <button
+              className="role-button"
+              onClick={() => {
+                window.location.href = "/UserLogin";
+                setIsRoleModalVisible(false);
+              }}
+            >
+              Customer
+            </button>
+            <button
+              className="role-button"
+              onClick={() => {
+                window.location.href = "/GarageRegistration"
+                setIsRoleModalVisible(false);
+              }}
+            >
+              Garage Owner
+            </button>
+          </div>
+        </div>
+      )}
       {/* Login Modal */}
       {isLoginVisible && (
         <div className="login-modal">
           <div className="modal-content">
-            <button onClick={closeLogin} className="close-modal-button">
-              &times;
-            </button>
-            <Login onLoginSuccess={handleLoginSuccess} />
+            <Login
+              onLoginSuccess={handleLoginSuccess}
+              onClose={closeLogin}
+            />
           </div>
         </div>
       )}
