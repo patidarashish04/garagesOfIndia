@@ -91,9 +91,7 @@ const handleUserLogin = () =>{
     setIsPopupVisible((prev) => !prev);
   };
   
-  const handleClick =()=>{
-    window.location.href="/garageRegistration"
-  }
+  
 
   return (
     <header className="header">
