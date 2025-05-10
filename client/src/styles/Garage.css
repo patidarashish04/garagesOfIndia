@@ -59,7 +59,7 @@ form {
   form button {
     width: 100%;
     padding: 12px 20px;
-    background-color: #007bff;
+    background-color: #e69824;
     color: white;
     font-size: 16px;
     font-weight: bold;
@@ -70,7 +70,7 @@ form {
   }
   
   form button:hover {
-    background-color: #0056b3;
+    background-color: #eeac31;
   }
   
   /* File Input Styling */

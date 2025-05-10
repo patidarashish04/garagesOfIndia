@@ -1,5 +1,5 @@
 import { useState, useRef } from "react";
-import "../styles/UserLogin.css";
+// import "../styles/UserLogin.css";
 import "../styles/Garage.css"
 import axios from "axios";
 
@@ -126,8 +126,8 @@ const LoginForm = () => {
     // Validate fields
     const newErrors = {};
     if (!userData.userName.trim()) newErrors.userName = "User Name is required";
-    if (!userData.location.trim()) newErrors.location = "Location is required";
-    if (!userData.contact.trim()) newErrors.contact = "Contact is required";
+    // if (!userData.location.trim()) newErrors.location = "Location is required";
+    // if (!userData.contact.trim()) newErrors.contact = "Contact is required";
     if (!userData.email.trim()) newErrors.email = "Email is required";
     if (userData.vehicleTypes.length === 0) newErrors.vehicleTypes = "At least one vehicle type must be selected";
 

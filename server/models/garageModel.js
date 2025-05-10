@@ -60,7 +60,7 @@ const garageSchema = new mongoose.Schema({
 });
 
 // Create a 2dsphere index for geospatial queries
-garageSchema.index({ location: "2dsphere" });
+garageSchema.index({ location: '2dsphere' });
 
 garageSchema.pre(/^find/, function (next) {
   this.populate({

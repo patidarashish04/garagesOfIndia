@@ -26,7 +26,7 @@ const HeroSection = () => {
 
       {/* Features and Search Section */}
       <div className="features-container">
-        <div className="search-bar">
+        <div className="garage-search-bar">
           <input
             type="text"
             placeholder="Search Garages"
