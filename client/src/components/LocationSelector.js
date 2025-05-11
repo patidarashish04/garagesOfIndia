@@ -2,6 +2,12 @@
 import React, { useState, useEffect } from "react";
 import "../styles/LocationSelector.css";
 
+import delhiImg from '../assets/delhiIcon.png';
+import bangaloreImg from '../assets/BangaloreIcon.png';
+import mumbaiImg from '../assets/mumbaiIcon.png';
+import chennaiImg from '../assets/chennaiIcon.png';
+// Add more imports as needed
+
 // const CitySelector = ({ onCitySelect }) => {
 //   const [searchQuery, setSearchQuery] = useState('');
 //   const [cities, setCities] = useState([]);
@@ -96,10 +102,10 @@ import "../styles/LocationSelector.css";
 // export default CitySelector;
 
 const cities = [
-  { name: "Delhi NCR", img: "path_to_delhi_image" },
-  { name: "Bangalore", img: "path_to_bangalore_image" },
-  { name: "Mumbai", img: "path_to_mumbai_image" },
-  { name: "Chennai", img: "path_to_chennai_image" },
+  { name: "Delhi NCR", img: delhiImg },
+  { name: "Bangalore", img: bangaloreImg },
+  { name: "Mumbai", img: mumbaiImg },
+  { name: "Chennai", img: chennaiImg },
   // Add more cities...
 ];
 
