@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import axios from "axios";
 import "../styles/Login.css";
-import loginPopImage from "../assets/avatar1.png";
+import loginPopImage from "../assets/loginpopImage.jpg";
 
 const Login = ({ onLoginSuccess, onClose }) => {
   const [formData, setFormData] = useState({

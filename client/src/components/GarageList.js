@@ -10,22 +10,22 @@ const GarageList = () => {
     const navigate = useNavigate(); // for navigation
     const [garageData, setGarageData] = useState([]);
 
-    
+
 
     useEffect(() => {
         const loadGarages = async () => {
-        //   setLoading(true); // show loader
-          try {
-            const data = await GarageListApiCall(); // await result
-            setGarageData(data);               // update state
-            // console.log("API Data:", data);
-          } catch (error) {
-            console.log("Error fetching garage data");
-          } finally {
-            // setLoading(false);
-          }
+            //   setLoading(true); // show loader
+            try {
+                const data = await GarageListApiCall(); // await result
+                setGarageData(data);               // update state
+                // console.log("API Data:", data);
+            } catch (error) {
+                console.log("Error fetching garage data");
+            } finally {
+                // setLoading(false);
+            }
         };
-      
+
         loadGarages();
 
     }, []);
@@ -39,34 +39,34 @@ const GarageList = () => {
                 name: garage?.name,
                 address: garage?.address,
                 overAllRating: {
-                  avgRating: Math.random() * 5,
-                  totalRatings: Math.floor(Math.random() * 100),
+                    avgRating: Math.random() * 5,
+                    totalRatings: Math.floor(Math.random() * 100),
                 },
                 contact: garage?.contact,
                 photos: garage?.photos, // or put sample image
-              }));
-              console.log(garageMappedData)
-              setFilteredGarages(garageMappedData);
-              setLoading(false);
+            }));
+            console.log(garageMappedData)
+            setFilteredGarages(garageMappedData);
+            setLoading(false);
         }
         renderGarages();
-      }, [garageData]);
+    }, [garageData]);
 
-  
+
     // useEffect(() => {
-      //fetch 
+    //fetch 
     //   const loadGarages = async()=>{
     //     try {
     //         const data = await GarageListApiCall()
     //         setGarageData(data)
     //         console.log(garageData)
     //     } catch (error) {
-            
+
     //     }
     //   }
     //   loadGarages()
-    
-      // Dummy data or fetch from API
+
+    // Dummy data or fetch from API
     //   const dummyGarages = Array.from({ length: 10 }).map((_, i) => ({
     //     id: i + 1,
     //     name: `Garage ${i + 1}`,
@@ -79,9 +79,28 @@ const GarageList = () => {
     //     photos: [""], // or put sample image
     //   }));
 
-    
+
     // }, []);
-  
+    const handleSendPromotion = async () => {
+        try {
+        //   const user = JSON.parse(localStorage.getItem("user")) || 'Hi User'; // if login info is stored
+        //   const phone = user?.phone || "+918461975062"; // fallback or prefilled number
+      
+          const response = await axios.post("http://localhost:9002/api/garages/67f434837a547565f527cd98/notify", {
+            // phone,
+          });
+      
+          if (response.status === 200) {
+            alert("Promotion sent via WhatsApp! ✅");
+          } else {
+            alert("Failed to send promotion ❌");
+          }
+        } catch (error) {
+          console.error("Send WhatsApp Promotion Error:", error);
+          alert("Something went wrong. Please try again.");
+        }
+      };
+
     return (<div className="main-container">
         {/* Garage List */}
         <div className="garage-list">
@@ -117,7 +136,9 @@ const GarageList = () => {
                                 >
                                     View Details
                                 </button>
-                                <button className="enquiry-btn">Send Enquiry</button>
+                                <button className="enquiry-btn" onClick={handleSendPromotion}>
+                                    Send Enquiry
+                                </button>
                             </div>
                         </div>
                     </div>
