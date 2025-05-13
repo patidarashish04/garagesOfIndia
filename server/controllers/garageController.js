@@ -32,8 +32,6 @@ exports.deleteGarage = factory.deleteOne(Garage);
 exports.nearByGarage = factory.findGarages(Garage);
 
 exports.notifyGarageOwner = catchAsync(async (req, res, next) => {
-  const { userName } = req.body;
-  
   // Get garage details using factory pattern
   const garage = await Garage.findById(req.params.id);
   if (!garage) return next(new AppError("Garage not found", 404));
@@ -44,7 +42,10 @@ exports.notifyGarageOwner = catchAsync(async (req, res, next) => {
   if (!ownerPhone) return next(new AppError("Garage owner has no WhatsApp number", 400));
 
   // Send WhatsApp message
-  const message = `${userName} has searched your garage.`;
+  const userName = garage.name; 
+  const message = `${userName} \n\n*Garages of India* 🚗\n\n_Exciting Offers Await!_\n\n🛠️ Get your vehicle serviced now!\n📍 Available in 25+ cities\n\n👉 Visit: www.garagesofindia.com`
+
+  // const message = `${userName} has searched your garage.`;
   await sendWhatsAppMessage(ownerPhone, message);
 
   res.status(200).json({

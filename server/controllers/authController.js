@@ -7,7 +7,7 @@ const AppError = require('../utils/appError');
 const sendEmail = require('../utils/email');
 const { sendOTP } = require('../utils/twilioClient');
 const generateOTP = require('../utils/generateOTP');
-
+const { sendWhatsAppMessage } = require('../utils/twilioClient');
 
 const signToken = (id) => {
   return jwt.sign({ id }, process.env.JWT_SECRET, {
@@ -249,6 +249,31 @@ exports.verifyOTP = async (req, res) => {
     });
 
     res.status(200).json({ message: "OTP verified successfully", token });
+  } catch (error) {
+    res.status(500).json({ message: "Server Error", error: error.message });
+  }
+};
+
+exports.sendWhatsAppPromotionMessage = async (req, res) => {
+  try {
+    const { phone } = req.body;
+    if (!phone) return res.status(400).json({ message: "whatsapp number is required" });
+
+    let user = await User.findOne({ phone });
+
+    if (!user) {
+      user = await User.create({ phone });
+    }
+
+    message = `*Garages of India* 🚗\n\n_Exciting Offers Await!_\n\n🛠️ Get your vehicle serviced now!\n📍 Available in 25+ cities\n\n👉 Visit: www.garagesofindia.com`
+
+    await user.save();
+    const twilioResponse = await sendWhatsAppMessage(phone, message);
+    if (!twilioResponse.success) {
+      return res.status(500).json({ message: "OTP sending failed", error: twilioResponse.error });
+    }
+
+    res.status(200).json({ message: "OTP sent successfully" });
   } catch (error) {
     res.status(500).json({ message: "Server Error", error: error.message });
   }
