@@ -91,6 +91,8 @@ const Header = () => {
   const togglePopup = () => {
     setIsPopupVisible((prev) => !prev);
   };
+  
+  
 
   return (
     <header className="header">

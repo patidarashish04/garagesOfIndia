@@ -36,6 +36,7 @@ import Ad from "./components/Ad";
 
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap-icons/font/bootstrap-icons.css';
+
 import Login from "./pages/Login";
 
 const App = () => {

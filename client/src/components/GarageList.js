@@ -10,6 +10,8 @@ const GarageList = () => {
     const navigate = useNavigate(); // for navigation
     const [garageData, setGarageData] = useState([]);
 
+    
+
     useEffect(() => {
         const loadGarages = async () => {
         //   setLoading(true); // show loader
@@ -32,7 +34,8 @@ const GarageList = () => {
         // console.log("API Data garageData:", garageData);
         const renderGarages = () => {
             const garageMappedData = garageData.map((garage, i) => ({
-                id: i + 1,
+                // first change
+                _id: garage._id,
                 name: garage?.name,
                 address: garage?.address,
                 overAllRating: {
@@ -110,7 +113,7 @@ const GarageList = () => {
                                 </a>
                                 <button
                                     className="details-btn"
-                                    onClick={() => navigate(`/garage/${garage.id}`)}
+                                    onClick={() => navigate(`/garages/${garage._id}`)}
                                 >
                                     View Details
                                 </button>

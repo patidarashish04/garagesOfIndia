@@ -54,14 +54,19 @@ const GarageDetail = () => {
 
       <div className="mb-4">
         <h3>Location</h3>
+        // change for not reading lat and lon
         <div className="embed-responsive embed-responsive-16by9">
-          <iframe
-            title="garage-location"
-            className="embed-responsive-item"
-            src={`https://www.google.com/maps?q=${garage.location.lat},${garage.location.lng}&hl=es;z=14&output=embed`}
-            allowFullScreen
-          ></iframe>
-        </div>
+  {garage?.location?.lat && garage?.location?.lng ? (
+    <iframe
+      title="garage-location"
+      className="embed-responsive-item"
+      src={`https://www.google.com/maps?q=${garage.location.lat},${garage.location.lng}&hl=es;z=14&output=embed`}
+      allowFullScreen
+    ></iframe>
+  ) : (
+    <p>Location not available</p>
+  )}
+</div>
       </div>
 
       <div>
