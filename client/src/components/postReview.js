@@ -14,7 +14,9 @@ const postReviewSection = () => {
 
   return (
     <section className="postReview-section">
-      <h2>What our customers say</h2>
+      <h2 id="reviews" className="text-center font-bold text-2xl my-8">
+        What our customers say
+      </h2>
       <div className="postReview-container">
         {postReviews.map((postReview) => (
           <div key={postReview._id} className="postReview-card">

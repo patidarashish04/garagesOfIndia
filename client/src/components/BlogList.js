@@ -22,7 +22,9 @@ const BlogList = () => {
 
   return (
     <div className="blog-list">
-      <h2>Recent Blogs</h2>
+      <h2 id="blogs" className="text-center font-bold text-2xl my-8">
+        Recent Blogs
+      </h2>
       <div className="blog-cards">
         {blogs.map((blog) => (
           <div key={blog._id} className="blog-card">
