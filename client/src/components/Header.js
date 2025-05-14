@@ -91,8 +91,8 @@ const Header = () => {
   const togglePopup = () => {
     setIsPopupVisible((prev) => !prev);
   };
-  
-  
+
+
 
   return (
     <header className="header">
@@ -137,11 +137,16 @@ const Header = () => {
       <nav className="header-center">
         <ul>
           <li><a href="/">Home</a></li>
-          <li><a href="/sell-car">Services</a></li>
-          <li><a href="/finance">Car Garages</a></li>
-          <li><a href="/services">Bike Garages</a></li>
-          <li><a href="/new-cars">Reviews</a></li>
-          <li><a href="/rto-check">Contact</a></li>
+          <li><a href="#services" className="nav-link">
+            Services</a></li>
+          <li><a href="#garages" className="nav-link">
+            Garages</a></li>
+          <li><a href="#blogs" className="nav-link">
+            Blogs</a></li>
+          <li><a href="#reviews" className="nav-link">
+            Reviews</a></li>
+          <li><a href="#contact" className="nav-link">
+            Contact</a></li>
         </ul>
       </nav>
 
