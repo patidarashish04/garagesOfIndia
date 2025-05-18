@@ -5,28 +5,65 @@ import GarageListApiCall from "../api/garageListApi"
 
 
 const GarageList = () => {
+    const [latitude, setLatitude] = useState(null);
+    const [longitude, setLongitude] = useState(null);
     const [loading, setLoading] = useState(true);
     const [filteredGarages, setFilteredGarages] = useState([]);
     const navigate = useNavigate(); // for navigation
     const [garageData, setGarageData] = useState([]);
 
+    // Step 1: Ask for location once
+    useEffect(() => {
+        const askLocation = async () => {
+            const confirmLocation = window.confirm("This app needs your location to add the garage. Allow access?");
+            if (!confirmLocation) return;
+        
+            if (!navigator.geolocation) {
+                alert("Geolocation is not supported by this browser.");
+                return;
+            }
+        
+            try {
+                const position = await new Promise((resolve, reject) => {
+                    navigator.geolocation.getCurrentPosition(resolve, reject);
+                });
+        
+                const { latitude, longitude } = position.coords;
+                setLatitude(latitude);
+                setLongitude(longitude);
+            } catch (error) {
+                console.error("Error getting location:", error);
+                alert("Location access is required to add a garage.");
+            }
+        };
+
+        askLocation();
+    }, []);
+
     useEffect(() => {
         const loadGarages = async () => {
-        //   setLoading(true); // show loader
-          try {
-            const data = await GarageListApiCall(); // await result
-            setGarageData(data);               // update state
-            // console.log("API Data:", data);
-          } catch (error) {
-            console.log("Error fetching garage data");
-          } finally {
-            // setLoading(false);
-          }
+            //   setLoading(true); // show loader
+            if (latitude === null || longitude === null) return;
+            if (latitude !== null && longitude !== null) {
+                try {
+                    const data = await GarageListApiCall(latitude, longitude); // await result
+                    setGarageData(data);               // update state
+                    // console.log("API Data:", data);
+                    console.log("this is garage data : "+data)
+                    setLoading(false);
+                } catch (error) {
+                    console.log("Error fetching garage data");
+                    setLoading(false);
+                } finally {
+                    // setLoading(false);
+                    setLoading(false);
+                }
+            }
         };
-      
+
         loadGarages();
 
-    }, []);
+    }, [latitude, longitude]);
 
     useEffect(() => {
         // console.log("API Data garageData:", garageData);
@@ -36,34 +73,34 @@ const GarageList = () => {
                 name: garage?.name,
                 address: garage?.address,
                 overAllRating: {
-                  avgRating: Math.random() * 5,
-                  totalRatings: Math.floor(Math.random() * 100),
+                    avgRating: Math.random() * 5,
+                    totalRatings: Math.floor(Math.random() * 100),
                 },
                 contact: garage?.contact,
                 photos: garage?.photos, // or put sample image
-              }));
-              console.log(garageMappedData)
-              setFilteredGarages(garageMappedData);
-              setLoading(false);
+            }));
+            console.log(garageMappedData)
+            setFilteredGarages(garageMappedData);
+            setLoading(false);
         }
         renderGarages();
-      }, [garageData]);
+    }, [garageData]);
 
-  
+
     // useEffect(() => {
-      //fetch 
+    //fetch 
     //   const loadGarages = async()=>{
     //     try {
     //         const data = await GarageListApiCall()
     //         setGarageData(data)
     //         console.log(garageData)
     //     } catch (error) {
-            
+
     //     }
     //   }
     //   loadGarages()
-    
-      // Dummy data or fetch from API
+
+    // Dummy data or fetch from API
     //   const dummyGarages = Array.from({ length: 10 }).map((_, i) => ({
     //     id: i + 1,
     //     name: `Garage ${i + 1}`,
@@ -76,9 +113,9 @@ const GarageList = () => {
     //     photos: [""], // or put sample image
     //   }));
 
-    
+
     // }, []);
-  
+
     return (<div className="main-container">
         {/* Garage List */}
         <div className="garage-list">
