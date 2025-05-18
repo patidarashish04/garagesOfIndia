@@ -60,48 +60,6 @@ const GarageForm = () => {
     }
   };
 
-  // const handleSubmit = async(e) => {
-  //   e.preventDefault();
-
-  //   const formData = new FormData();
-  //       formData.append("name", garageData.name);
-  //       formData.append("description", garageData.description);
-  //       formData.append("location", garageData.location);
-  //       formData.append("rating", garageData.rating);
-  //       formData.append("contact", garageData.contact);
-        
-  //       console.log("Latitude"+ userLocation.latitude);
-  //       console.log("Longitude"+ userLocation.longitude);
-  //       formData.append("longitude",userLocation.longitude);
-  //       formData.append("latitude", userLocation.latitude);
-
-  //   const newErrors = {};
-
-  //   if (!garageData.name.trim()) newErrors.name = "Garage Name is required";
-  //   if (!garageData.description.trim()) newErrors.description = "Description is required";
-  //   if (!garageData.location.trim()) newErrors.location = "Location is required";
-  //   if (!garageData.contact.trim()) newErrors.contact = "Contact is required";
-  //   if (garageData.vehicleTypes.length === 0) newErrors.vehicleTypes = "At least one vehicle type must be selected";
-  //   if (garageData.photos.length === 0) newErrors.photos = "Please upload at least one photo";
-
-  //   setErrors(newErrors);
-
-  //   if (Object.keys(newErrors).length === 0) {
-  //     try {
-  //       const response = await axios.post("http://localhost:9002/api/garages", formData, {
-  //           headers: {
-  //               "Content-Type": "application/json",
-  //           },
-  //       });
-  //       console.log("Garage created successfully:", response.data);
-  //       alert("Garage added successfully!");
-  //   } catch (error) {
-  //       console.error("Error creating garage:", error);
-  //       alert("Failed to add garage.");
-  //   }
-      
-  //   }
-  // };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -116,15 +74,23 @@ const GarageForm = () => {
           const { latitude, longitude } = position.coords;
           setUserLocation({ latitude, longitude });
   
-          const formData = new FormData();
-          formData.append("name", garageData.name);
-          formData.append("description", garageData.description);
-          formData.append("location", garageData.location);
-          formData.append("rating", garageData.rating);
-          // formData.append("contact", garageData.contact);
-          formData.append("contact", `+91${garageData.contact}`);
-          formData.append("latitude", latitude);
-          formData.append("longitude", longitude);
+          const payload = {
+            name: garageData.name,
+            description: garageData.description,
+            address: garageData.location,
+            contact: `+91${garageData.contact}`,
+            location: {
+              type: "Point",
+              coordinates: [
+                parseFloat(latitude), 
+                parseFloat(longitude)
+              ]
+            },
+            vehicleTypes:garageData.vehicleTypes,
+            photos :["https://fastly.picsum.photos/id/777/250/250.jpg?hmac=nqSh8p2OltjDJOw6NEDEj1rsgI9BGtFBrTN5mDxOmmY"]
+          };
+          
+        
   
           // Validate fields
           const newErrors = {};
@@ -138,7 +104,7 @@ const GarageForm = () => {
           setErrors(newErrors);
           if (Object.keys(newErrors).length === 0) {
             try {
-              const response = await axios.post("http://localhost:9002/api/garages", formData, {
+              const response = await axios.post("http://localhost:9002/api/garages", payload, {
                 headers: {
                   "Content-Type": "application/json",
                 },
