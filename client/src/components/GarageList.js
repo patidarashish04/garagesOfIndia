@@ -69,7 +69,8 @@ const GarageList = () => {
         // console.log("API Data garageData:", garageData);
         const renderGarages = () => {
             const garageMappedData = garageData.map((garage, i) => ({
-                id: i + 1,
+                // first change
+                _id: garage._id,
                 name: garage?.name,
                 address: garage?.address,
                 overAllRating: {
@@ -115,6 +116,25 @@ const GarageList = () => {
 
 
     // }, []);
+    const handleSendPromotion = async () => {
+        try {
+        //   const user = JSON.parse(localStorage.getItem("user")) || 'Hi User'; // if login info is stored
+        //   const phone = user?.phone || "+918461975062"; // fallback or prefilled number
+      
+          const response = await axios.post("http://localhost:9002/api/garages/67f434837a547565f527cd98/notify", {
+            // phone,
+          });
+      
+          if (response.status === 200) {
+            alert("Promotion sent via WhatsApp! ✅");
+          } else {
+            alert("Failed to send promotion ❌");
+          }
+        } catch (error) {
+          console.error("Send WhatsApp Promotion Error:", error);
+          alert("Something went wrong. Please try again.");
+        }
+      };
 
     return (<div className="main-container">
         {/* Garage List */}
@@ -147,11 +167,13 @@ const GarageList = () => {
                                 </a>
                                 <button
                                     className="details-btn"
-                                    onClick={() => navigate(`/garage/${garage.id}`)}
+                                    onClick={() => navigate(`/garages/${garage._id}`)}
                                 >
                                     View Details
                                 </button>
-                                <button className="enquiry-btn">Send Enquiry</button>
+                                <button className="enquiry-btn" onClick={handleSendPromotion}>
+                                    Send Enquiry
+                                </button>
                             </div>
                         </div>
                     </div>

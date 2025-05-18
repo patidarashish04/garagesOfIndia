@@ -5,7 +5,9 @@ import { services } from "./servicesData";
 function ServiceSection() {
   return (
     <section className="service-section">
-      <h2>Service & Maintenance</h2>
+      <h2 id="services" className="text-center font-bold text-2xl my-8">
+        Service & Maintenance
+      </h2>
       <div className="service-cards">
         {services.map((service, index) => (
           <div className="service-card" key={index}>
@@ -18,7 +20,7 @@ function ServiceSection() {
                 ))}
               </ul>
               <a href="/add-car" className="add-car-link">
-                Add car →
+                More Detail.. →
               </a>
             </div>
           </div>

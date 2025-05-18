@@ -18,7 +18,6 @@ const sendWhatsAppMessage = async (to, message) => {
 };
 
 const sendOTP = async (phone, otp) => {
-  console.log('================>>>>>>>.', phone, otp)
   try {
     await client.messages.create({
       body: `Your OTP is ${otp}. It is valid for ${process.env.OTP_EXPIRY} minutes.`,

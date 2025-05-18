@@ -8,6 +8,7 @@ import Slider from "./components/Slider";
 import NearbyGarages from "./components/NearbyGarages";
 import ServiceSection from "./components/ServiceSection";
 import BlogList from "./components/BlogList";
+import BlogDetail from './pages/postDetailPage'; // Create this next
 import TestimonialList from "./components/postReview";
 import HeroSection from "./components/HeroSection";
 // import Brands from "./components/Brand";
@@ -24,6 +25,8 @@ import LoginForm from "./components/UserLogin";
 
 import GarageForm from "../src/components/Garage";
 import GarageList from "./components/GarageList";
+import Ad from "./components/Ad";
+
 
 
 
@@ -33,6 +36,7 @@ import GarageList from "./components/GarageList";
 
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap-icons/font/bootstrap-icons.css';
+
 import Login from "./pages/Login";
 
 const App = () => {
@@ -48,6 +52,7 @@ const App = () => {
             <>
               <HeroSection />
               <Slider />
+              <Ad/>
               <ServiceSection />
               <BlogList />
               <TestimonialList />
@@ -72,6 +77,7 @@ const App = () => {
         <Route path="/garages/:id" element={<GarageDetail />} />
         <Route path="/admin/blogs" element={<BlogPage />} />
         <Route path="/garageList" element={<GarageList />} />
+        <Route path="/blogs/:id" element={<BlogDetail />} />
         {/* <Route path="/admin/users" element={<ManageUsers />} /> */}
         {/* Add more admin routes */}
       </Routes>

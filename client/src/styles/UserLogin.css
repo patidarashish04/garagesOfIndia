@@ -68,7 +68,7 @@ input[type="radio"] {
 
 /* Submit button */
 button[type="submit"] {
-    background-color: #007bff;
+    background-color: #ff8c00;
     color: white;
     border: none;
     padding: 12px;
@@ -81,5 +81,5 @@ button[type="submit"] {
 
 /* Submit button hover */
 button[type="submit"]:hover {
-    background-color: #0056b3;
+    background-color: #d3a72d;
 }

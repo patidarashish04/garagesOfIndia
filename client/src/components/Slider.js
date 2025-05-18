@@ -1,10 +1,10 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import "../styles/Slider.css";
-// import ArrowLeftIcon  from "../assets/garage-icon.png"; 
-// import ArrowRightIcon  from "../assets/garage-icon.png";
-import { ReactComponent as ArrowLeftIcon } from "../assets/ArrowRight.svg";
-import { ReactComponent as ArrowRightIcon } from "../assets/ArrowRight.svg";
+// import ArrowLeftIcon  from "../assets/left-arrow.png"; 
+// import ArrowRightIcon  from "../assets/right-arrow.png";
+import { ReactComponent as ArrowLeftIcon } from "../assets/left-arrow.svg";
+import { ReactComponent as ArrowRightIcon } from "../assets/right-arrow.svg";
 
 const sliderItems = [
   {

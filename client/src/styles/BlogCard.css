@@ -87,3 +87,6 @@
     gap: 20px;
   }
   
+  #blogs {
+    scroll-margin-top: 80px; /* Adjust based on your navbar height */
+  }

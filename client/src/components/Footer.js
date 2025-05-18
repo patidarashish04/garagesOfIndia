@@ -18,7 +18,9 @@ const Footer = () => {
       <div className="footer-container">
         {/* Contact Information */}
         <div className="footer-section">
-          <h4>Contact Us</h4>
+          <h4 id="contact" className="text-center font-bold text-2xl my-8">
+            Contact Us
+          </h4>
           <p>11/22 First Floor, Old Madiwala City</p>
           <p>Email: support@garagesofindia.com</p>
           <p>Phone: +917987921029</p>
