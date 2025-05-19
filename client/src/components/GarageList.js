@@ -1,10 +1,12 @@
 import axios from "axios";
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
+import { AuthContext } from '../context/AuthContext';
 import { useNavigate } from "react-router-dom";
 import GarageListApiCall from "../api/garageListApi"
 
 
 const GarageList = () => {
+    const { user, setIsLoginVisible } = useContext(AuthContext);
     const [loading, setLoading] = useState(true);
     const [filteredGarages, setFilteredGarages] = useState([]);
     const navigate = useNavigate(); // for navigation
@@ -81,7 +83,20 @@ const GarageList = () => {
 
 
     // }, []);
-    const handleSendPromotion = async () => {
+
+    const handleViewDetails = (garageId) => {
+        if (!user) {
+          setIsLoginVisible(true);  // Opens the same login popup from Header
+          return;
+        }
+        navigate(`/garages/${garageId}`);
+      };
+
+    const handleSendPromotion = async (garageId) => {
+        if (!user) {
+            setIsLoginVisible(true);
+            return;
+          }
         try {
         //   const user = JSON.parse(localStorage.getItem("user")) || 'Hi User'; // if login info is stored
         //   const phone = user?.phone || "+918461975062"; // fallback or prefilled number
@@ -130,15 +145,8 @@ const GarageList = () => {
                                 <a href={`tel:${garage.contact}`} className="call-btn">
                                     📞 {garage.contact || "N/A"}
                                 </a>
-                                <button
-                                    className="details-btn"
-                                    onClick={() => navigate(`/garages/${garage._id}`)}
-                                >
-                                    View Details
-                                </button>
-                                <button className="enquiry-btn" onClick={handleSendPromotion}>
-                                    Send Enquiry
-                                </button>
+                                <button onClick={() => handleViewDetails(garage._id)}>View Details</button>
+                                <button onClick={() => handleSendPromotion(garage._id)}>Send Enquiry</button>
                             </div>
                         </div>
                     </div>
