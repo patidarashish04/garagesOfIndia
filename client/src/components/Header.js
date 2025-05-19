@@ -1,6 +1,7 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useRef, useContext } from 'react';
 import '../styles/Header.css';
 import Register from '../pages/Register';
+import { AuthContext } from '../context/AuthContext';
 import Login from '../pages/Login';
 import userIcon from '../assets/profile-user.png';
 import garageIcon from '../assets/garage-icon.png';
@@ -8,37 +9,28 @@ import LocationSelector from "../components/LocationSelector";
 import LocationModal from "../components/LocationSelector";
 import { FaMapMarkerAlt } from "react-icons/fa";
 
-// import { Navbar, Nav, Container, Button, Form, FormControl } from "react-bootstrap";
-
-
 const Header = () => {
-  const [user, setUser] = useState(null);
+  const {
+    user,
+    isLoginVisible,
+    setIsLoginVisible,
+    handleLoginSuccess,
+    handleLogout,
+  } = useContext(AuthContext);
+
   const [isPopupVisible, setIsPopupVisible] = useState(false);
   const [isRegistrationVisible, setIsRegistrationVisible] = useState(false);
-  const [isLoginVisible, setIsLoginVisible] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isLocationModalOpen, setIsLocationModalOpen] = useState(false);
   const [currentCity, setCurrentCity] = useState("Bangalore");
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isRoleModalVisible, setIsRoleModalVisible] = useState(false);
 
-
   const popupRef = useRef(null);
   const handleClickOutside = (event) => {
     if (popupRef.current && !popupRef.current.contains(event.target)) {
       setIsPopupVisible(false);
     }
-  };
-
-  // Simulate fetching user data (replace with actual API call if needed)
-  useEffect(() => {
-    const loggedInUser = JSON.parse(localStorage.getItem('user')) || null;
-    setUser(loggedInUser);
-  }, []);
-
-  const handleLogout = () => {
-    setUser(null);
-    localStorage.removeItem('user');
   };
 
   const toggleMenu = () => {
@@ -49,12 +41,10 @@ const Header = () => {
   const handleMouseLeave = () => setIsPopupVisible(false);
 
   const openRegistration = () => {
-    // setIsRegistrationVisible(true);
     setIsLoginVisible(false);
     setIsPopupVisible(false);
-    setIsRoleModalVisible(true); // Open Role Selection Modal
+    setIsRoleModalVisible(true);
   };
-
 
   const handleUserLogin = () => {
     window.location.href = "/UserLogin"
@@ -64,9 +54,6 @@ const Header = () => {
     window.location.href = "/GarageRegistration"
   };
 
-
-  // const [isGaragesFormOpen, setIsGaragesFormOpen] = useState(false);
-
   const openLogin = () => {
     setIsLoginVisible(true);
     setIsRegistrationVisible(false);
@@ -74,25 +61,14 @@ const Header = () => {
   };
 
   const closeRegistration = () => setIsRegistrationVisible(false);
-  const closeLogin = () => setIsLoginVisible(false);
-
-  const handleLoginSuccess = (loggedInUser) => {
-    console.log(loggedInUser)
-    setUser(loggedInUser); // Update the `user` state in Header
-    setIsLoginVisible(false); // Close the login modal
-  };
 
   const handleLocationSelect = (location) => {
     setSelectedLocation(location);
-    // Save location to the backend or state management here
   };
-
 
   const togglePopup = () => {
     setIsPopupVisible((prev) => !prev);
   };
-
-
 
   return (
     <header className="header">
@@ -100,16 +76,6 @@ const Header = () => {
       <div className="header-logo">
         <img src={garageIcon} alt="Garage Icon" />
         <h1>Garage Of India</h1>
-        {/* <button onClick={handleClick}>Garage Registration</button>
-        <button onClick={handleUserLogin}> Login</button> */}
-
-
-        {/* {isGaragesFormOpen && (
-        <div className="garages-modal">
-          <button className="close-button" onClick={() => setIsGaragesFormOpen(false)}>Close</button>
-          <Garages />
-        </div>
-      )} */}
       </div>
 
       {/* Location Selector */}
@@ -137,23 +103,13 @@ const Header = () => {
       <nav className="header-center">
         <ul>
           <li><a href="/">Home</a></li>
-          <li><a href="#services" className="nav-link">
-            Services</a></li>
-          <li><a href="#garages" className="nav-link">
-            Garages</a></li>
-          <li><a href="#blogs" className="nav-link">
-            Blogs</a></li>
-          <li><a href="#reviews" className="nav-link">
-            Reviews</a></li>
-          <li><a href="#contact" className="nav-link">
-            Contact</a></li>
+          <li><a href="#services" className="nav-link">Services</a></li>
+          <li><a href="#garages" className="nav-link">Garages</a></li>
+          <li><a href="#blogs" className="nav-link">Blogs</a></li>
+          <li><a href="#reviews" className="nav-link">Reviews</a></li>
+          <li><a href="#contact" className="nav-link">Contact</a></li>
         </ul>
       </nav>
-
-      {/* <Form className="d-flex me-2">
-            <FormControl type="search" placeholder="Search garages..." className="me-2" />
-            <Button variant="outline-light">Search</Button>
-          </Form> */}
 
       {/* Account Section */}
       <div
@@ -194,7 +150,6 @@ const Header = () => {
             </div>
           )}
         </div>
-
       </div>
 
       {/* Registration Modal */}
@@ -236,17 +191,19 @@ const Header = () => {
           </div>
         </div>
       )}
+
       {/* Login Modal */}
       {isLoginVisible && (
         <div className="login-modal">
           <div className="modal-content">
             <Login
               onLoginSuccess={handleLoginSuccess}
-              onClose={closeLogin}
+              onClose={() => setIsLoginVisible(false)}
             />
           </div>
         </div>
       )}
+
       <div className="hamburger" onClick={toggleMenu}>
         ☰
       </div>
