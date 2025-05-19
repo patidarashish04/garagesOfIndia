@@ -22,15 +22,10 @@ import GarageDetail from "../src/components/GarageDetail"; // Update the path
 import BlogPage from "../src/pages/BlogPage"; // Update the path
 import SearchResults from "../src/components/SearchResults"; // Update the path
 import LoginForm from "./components/UserLogin";
-
+import { AuthProvider } from './context/AuthContext';
 import GarageForm from "../src/components/Garage";
 import GarageList from "./components/GarageList";
 import Ad from "./components/Ad";
-
-
-
-
-
 
 
 
@@ -42,6 +37,7 @@ import Login from "./pages/Login";
 const App = () => {
   return (
     <Router>
+       <AuthProvider>
       {/* Main Application */}
       <Header />
       <Routes>
@@ -81,6 +77,7 @@ const App = () => {
         {/* <Route path="/admin/users" element={<ManageUsers />} /> */}
         {/* Add more admin routes */}
       </Routes>
+      </AuthProvider>
       <Footer />
     </Router>
     
