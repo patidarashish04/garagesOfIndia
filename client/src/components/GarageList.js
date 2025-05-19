@@ -6,31 +6,69 @@ import GarageListApiCall from "../api/garageListApi"
 
 
 const GarageList = () => {
+
     const { user, setIsLoginVisible } = useContext(AuthContext);
+
+    const [latitude, setLatitude] = useState(null);
+    const [longitude, setLongitude] = useState(null);
+
     const [loading, setLoading] = useState(true);
     const [filteredGarages, setFilteredGarages] = useState([]);
     const navigate = useNavigate(); // for navigation
     const [garageData, setGarageData] = useState([]);
 
+    // Step 1: Ask for location once
+    useEffect(() => {
+        const askLocation = async () => {
+            const confirmLocation = window.confirm("This app needs your location to add the garage. Allow access?");
+            if (!confirmLocation) return;
+        
+            if (!navigator.geolocation) {
+                alert("Geolocation is not supported by this browser.");
+                return;
+            }
+        
+            try {
+                const position = await new Promise((resolve, reject) => {
+                    navigator.geolocation.getCurrentPosition(resolve, reject);
+                });
+        
+                const { latitude, longitude } = position.coords;
+                setLatitude(latitude);
+                setLongitude(longitude);
+            } catch (error) {
+                console.error("Error getting location:", error);
+                alert("Location access is required to add a garage.");
+            }
+        };
 
+        askLocation();
+    }, []);
 
     useEffect(() => {
         const loadGarages = async () => {
             //   setLoading(true); // show loader
-            try {
-                const data = await GarageListApiCall(); // await result
-                setGarageData(data);               // update state
-                // console.log("API Data:", data);
-            } catch (error) {
-                console.log("Error fetching garage data");
-            } finally {
-                // setLoading(false);
+            if (latitude === null || longitude === null) return;
+            if (latitude !== null && longitude !== null) {
+                try {
+                    const data = await GarageListApiCall(latitude, longitude); // await result
+                    setGarageData(data);               // update state
+                    // console.log("API Data:", data);
+                    console.log("this is garage data : "+data)
+                    setLoading(false);
+                } catch (error) {
+                    console.log("Error fetching garage data");
+                    setLoading(false);
+                } finally {
+                    // setLoading(false);
+                    setLoading(false);
+                }
             }
         };
 
         loadGarages();
 
-    }, []);
+    }, [latitude, longitude]);
 
     useEffect(() => {
         // console.log("API Data garageData:", garageData);
