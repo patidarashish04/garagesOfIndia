@@ -24,6 +24,12 @@ router
   .patch(garageController.updateGarage)
   .delete(garageController.deleteGarage)
 
+  router                                     // ✅ add review to garages
+  .route('/review:id')
+  .post(garageController.createGarageReview)
+  .put(garageController.updateGarageReview)
+  .delete(garageController.deleteGarageReview)
+  
 router
   .route("/:id/notify")
   .post(garageController.notifyGarageOwner); // ✅ New Route
