@@ -53,3 +53,9 @@ exports.notifyGarageOwner = catchAsync(async (req, res, next) => {
     message: "WhatsApp message sent successfully.",
   });
 });
+
+
+  //Add a review:
+  exports.createGarageReview = factory.addReview(Garage);
+  exports.updateGarageReview = factory.updateReview(Garage);
+  exports.deleteGarageReview = factory.deleteReview(Garage);

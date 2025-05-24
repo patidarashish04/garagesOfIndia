@@ -6,6 +6,7 @@ const dotenv = require('dotenv');
 dotenv.config({ path: './.env' });
 const app = require('./app');
 
+//mongodb+srv://patidarashish04:kn466Ar7VlaeZb6R@cluster0.42qmucs.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0
 // DATABASE_LOCAL=mongodb://localhost:27017/rentalPGApp
 // const DB = process.env.DATABASE_LOCAL || "mongodb://localhost:27018/rentalPGApp";
 // const DB = process.env.DATABASE.replace('<PASSWORD>', process.env.DATABASE_PASSWORD);

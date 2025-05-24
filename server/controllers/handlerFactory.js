@@ -172,7 +172,7 @@ exports.findGarages = (Model) =>
             near: userLocation,
             distanceField: "distance",
             spherical: true,
-            maxDistance: 10000, // 10km radius
+            maxDistance: 100000, // 10km radius
           },
         },
         { $sort: { distance: 1 } }, // Nearest first
@@ -195,3 +195,48 @@ exports.findGarages = (Model) =>
       });
     }
   });
+
+  exports.addReview = (Model) =>
+    catchAsync(async (req, res, next) => {
+      const { garageId } = req.params;
+      console.log('=====>>', ga)
+    const { comment, rating } = req.body;
+    const userId = req.user._id;
+  
+    console.log('=====>>',garageId, comment, rating )
+    const garage = await Model.findById(garageId);
+    if (!garage) return res.status(404).send('Garage not found');
+  
+    garage.reviews.push({ user: userId, comment, rating });
+    await garage.save();
+    res.send(garage);
+  });
+
+   //Update a review:
+  exports.updateReview = (Model) =>
+    catchAsync(async (req, res, next) => {
+    const { garageId, reviewId } = req.params;
+    const { comment, rating } = req.body;
+  
+    const garage = await Model.findById(garageId);
+    const review = garage.reviews.id(reviewId);
+    if (!review) return res.status(404).send('Review not found');
+  
+    review.comment = comment;
+    review.rating = rating;
+    await garage.save();
+    res.send(garage);
+  });
+
+
+  //Delete a review:
+  exports.deleteReview = (Model) =>
+    catchAsync(async (req, res, next) => {
+    const { garageId, reviewId } = req.params;
+  
+    const garage = await Model.findById(garageId);
+    garage.reviews.id(reviewId).remove();
+    await garage.save();
+    res.send(garage);
+  });
+  
