@@ -49,6 +49,10 @@ app.use((req, res, next) => {
   next();
 });
 
+app.get('/', (req, res) => {
+  res.send('🚀 Garages of India API is live');
+});
+
 
 // 2) ROUTES
 app.use('/api/users', userRouter);
@@ -59,6 +63,7 @@ app.use('/api/blogs', blogRouter);
 app.use('/api/brands', brandRouter);
 app.use('/api/postReview', postReviewRouter);
 app.use('/api/garages', garageRouter);
+app.use('/api/garagesReview', garageRouter);
 app.use('/api/city', cityRouter);
 
 app.all('*', (req, res, next) => {

@@ -1,5 +1,24 @@
 const mongoose = require('mongoose');
 
+const reviewSchema = new mongoose.Schema({
+      user: {
+        type: mongoose.Schema.ObjectId,
+        ref: 'User',
+        required: [false, 'Review must belong to a User!'],
+      },
+      rating: {
+        type: Number,
+        min: 1,
+        max: 5,
+        required: [false, 'Review must have a rating!'],
+      },
+      comment: String,   // This allows a string to be added as a comment.
+      date: {
+        type: Date,
+        default: Date.now,
+      },
+});
+
 const garageSchema = new mongoose.Schema({
   name: {
     type: String,
@@ -37,26 +56,7 @@ const garageSchema = new mongoose.Schema({
     type: String,
     required: [false, 'Garage must have a alternate contact number!'],  // Owner's Alternate number
   },
-  reviews: [
-    {
-      user: {
-        type: mongoose.Schema.ObjectId,
-        ref: 'User',
-        required: [false, 'Review must belong to a User!'],
-      },
-      rating: {
-        type: Number,
-        min: 1,
-        max: 5,
-        required: [false, 'Review must have a rating!'],
-      },
-      comment: String,   // This allows a string to be added as a comment.
-      date: {
-        type: Date,
-        default: Date.now,
-      },
-    },
-  ],
+  reviews: [reviewSchema], // <-- Embedded reviews
 });
 
 // Create a 2dsphere index for geospatial queries

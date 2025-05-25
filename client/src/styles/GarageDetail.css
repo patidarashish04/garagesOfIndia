@@ -1,4 +1,4 @@
-/* src/components/GarageDetail.css
+/* src/components/GarageDetail.css */
 
 /* Container styling */
 .container {
@@ -52,13 +52,5 @@
     border: 1px solid #dee2e6;
     border-radius: 10px;
     overflow: hidden;
-  } */
-/*  for scroll view */
-  .no-scrollbar::-webkit-scrollbar {
-  display: none;
-}
-.no-scrollbar {
-  -ms-overflow-style: none;
-  scrollbar-width: none;
-}
+  }
   
