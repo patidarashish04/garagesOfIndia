@@ -4,11 +4,11 @@
   margin: 0 auto;
   padding: 20px;
   color: #333;
-  font-size: 16px; /* Increased base font size */
+  font-size: 16px;
 }
 
 .garage-breadcrumb {
-  font-size: 16px; /* Increased from 14px */
+  font-size: 16px;
   margin-bottom: 20px;
   color: #666;
 }
@@ -26,20 +26,22 @@
   padding-bottom: 20px;
 }
 
-.garage-name {
+.garageDet-name {
   font-weight: bold;
   margin-bottom: 8px;
   color: #020203f8;
-  font-size: 32px; 
+  font-size: 0px;
 }
 
 .garage-rating span {
   color: #666;
-  font-size: 16px; /* Increased from 14px */
+  font-size: 16px;
+  /* Increased from 14px */
 }
 
 .garage-subtext {
-  font-size: 16px; /* Increased from 14px */
+  font-size: 16px;
+  /* Increased from 14px */
   color: #110b0bc2;
   margin-bottom: 20px;
 }
@@ -50,17 +52,21 @@
   margin-bottom: 20px;
 }
 
-.btn-show-number, .btn-best-deal, .btn-whatsapp {
-  padding: 10px 18px; /* Slightly larger */
+.btn-show-number,
+.btn-best-deal,
+.btn-whatsapp {
+  padding: 10px 18px;
+  /* Slightly larger */
   border: none;
   border-radius: 4px;
   font-weight: bold;
   cursor: pointer;
-  font-size: 16px; /* Increased */
+  font-size: 16px;
+  /* Increased */
 }
 
 .btn-show-number {
-  background-color: #0066cc;
+  background-color: #398ee2;
   color: white;
 }
 
@@ -80,11 +86,11 @@
 }
 
 .left-content {
-  flex: 2;
+  flex: -12;
 }
 
 .right-content {
-  flex: 1;
+  flex: 5;
 }
 
 .garage-tabs {
@@ -96,9 +102,11 @@
 }
 
 .garage-tabs li {
-  padding: 12px 18px; /* Larger padding */
+  padding: 12px 18px;
+  /* Larger padding */
   cursor: pointer;
-  font-size: 16px; /* Increased */
+  font-size: 16px;
+  /* Increased */
   color: #666;
 }
 
@@ -115,16 +123,18 @@
 }
 
 .content-section {
-  scroll-margin-top: 20px; /* For smooth scrolling */
+  scroll-margin-top: 20px;
+  /* For smooth scrolling */
 }
 
 .content-section h2 {
-  font-size: 24px; /* Larger heading */
+  font-size: 24px;
+  /* Larger heading */
   margin-bottom: 15px;
   color: #222;
 }
 
-.services-section h3 {
+.services-section h1 {
   font-size: 20px;
   margin-bottom: 10px;
 }
@@ -164,10 +174,11 @@
 
 .garage-photo {
   width: 100%;
-  height: 150px; /* Slightly larger */
+  height: 150px;
+  /* Slightly larger */
   object-fit: cover;
   border-radius: 4px;
-  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 .no-photos {
@@ -213,7 +224,8 @@
 }
 
 .star {
-  font-size: 28px; /* Larger stars */
+  font-size: 28px;
+  /* Larger stars */
   cursor: pointer;
   color: #ccc;
   margin-right: 5px;
@@ -255,6 +267,7 @@
   padding: 15px 0;
   border-bottom: 1px solid #eee;
   color: #ff9529;
+  font-size: 16px
 }
 
 .review-header {
@@ -266,6 +279,7 @@
 .reviewer-name {
   font-weight: bold;
   font-size: 16px;
+  color: #222222;
 }
 
 .review-text {
@@ -286,6 +300,7 @@
   padding: 50px;
   margin-bottom: 1020px;
   background: white;
+  right: 20%;
 }
 
 .contact-box h4 {
@@ -343,26 +358,26 @@
   .main-content-wrapper {
     flex-direction: column;
   }
-  
+
   .photo-gallery {
     grid-template-columns: repeat(2, 1fr);
   }
-  
-  /* .contact-box {
+
+  .contact-box {
     position: static;
     margin-top: 30px;
-  } */
+  }
 }
 
 @media (max-width: 480px) {
   .garage-action-buttons {
     flex-direction: column;
   }
-  
+
   .photo-gallery {
     grid-template-columns: 1fr;
   }
-  
+
   .services-list {
     grid-template-columns: 1fr;
   }
@@ -487,11 +502,12 @@
 /* Similar Garages Section */
 .similar-garages {
   margin: 30px 0;
+  font-size: 18px;
 }
 
-.similar-garages h3 {
+.similar-garages h1 {
   font-size: 18px;
-  color: #444;
+  color: #070505;
   margin-bottom: 15px;
 }
 
@@ -502,12 +518,24 @@
   padding-bottom: 10px;
 }
 
-.garage-card {
+.garageDet-card {
   min-width: 280px;
   border: 1px solid #eee;
   border-radius: 8px;
   padding: 15px;
   background: #fff;
+  background-color: #fff;
+  overflow: hidden;
+  transition: transform0.3s ease;
+}
+
+.garageDet-card:hover {
+  transform: translateY(-5px);
+}
+
+.garageDet-card:hover {
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  cursor: pointer;
 }
 
 .garage-card h4 {
@@ -516,14 +544,45 @@
   color: #222;
 }
 
-.garage-rating {
-  color: #ff9529;
-  font-size: 14px;
+.garageHead-rating {
+  color: #161814;
+  font-size: 18px;
   margin-bottom: 8px;
 }
+
+.rating-badge {
+  background-color: #0a8a04; /* Green background */
+  color: white;
+  padding: 4px 8px;
+  border-radius: 6px;
+  font-weight: bold;
+  font-size: 14px;
+  display: inline-block;
+}
+
 
 .garage-address {
   font-size: 14px;
   color: #666;
   margin: 0;
+}
+
+.arrow-controls {
+  display: flex;
+  justify-content: flex-end;
+  margin-bottom: 10px;
+}
+
+.arrow-controls button {
+  background-color: #eee;
+  border: none;
+  padding: 6px 10px;
+  margin-left: 5px;
+  font-size: 18px;
+  cursor: pointer;
+}
+
+.arrow-controls button:disabled {
+  cursor: not-allowed;
+  opacity: 0.5;
 }
