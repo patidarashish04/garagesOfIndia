@@ -12,7 +12,7 @@ const GarageList = () => {
     const [latitude, setLatitude] = useState(null);
     const [longitude, setLongitude] = useState(null);
 
-    const [loading, setLoading] = useState(true);
+    
     const [filteredGarages, setFilteredGarages] = useState([]);
     const navigate = useNavigate(); // for navigation
     const [garageData, setGarageData] = useState([]);

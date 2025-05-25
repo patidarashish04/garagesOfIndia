@@ -150,7 +150,7 @@ exports.findGarages = (Model) =>
         //bangalore location as default is locaiton not provided
         latitude = "12.9716";
         longitude = "77.5946";
-      }
+      }
       const lat = parseFloat(latitude);
       const lng = parseFloat(longitude);
       // Validate if lat/lng are valid numbers
