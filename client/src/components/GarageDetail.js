@@ -1,8 +1,9 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useContext } from 'react';
 import axios from 'axios';
 import { useNavigate, useParams, Link } from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import '../styles/GarageDetail.css';
+import { AuthContext } from '../context/AuthContext';
 
 const GarageDetail = () => {
   const { id } = useParams();
@@ -16,6 +17,8 @@ const GarageDetail = () => {
   const [similarGarages, setSimilarGarages] = useState([]);
   const [showNumber, setShowNumber] = useState(false);
   const navigate = useNavigate();
+  const { user, setIsLoginVisible } = useContext(AuthContext);
+
 
   const handleShowNumber = () => {
     setShowNumber(true);
@@ -96,25 +99,25 @@ const GarageDetail = () => {
     }
   };
 
-    const handleSendPromotion = async (garageId) => {
-        try {
-        //   const user = JSON.parse(localStorage.getItem("user")) || 'Hi User'; // if login info is stored
-        //   const phone = user?.phone || "+918461975062"; // fallback or prefilled number
-      
-          const response = await axios.post("http://localhost:9002/api/garages/67f434837a547565f527cd98/notify", {
-            // phone,
-          });
-      
-          if (response.status === 200) {
-            alert("Promotion sent via WhatsApp! ✅");
-          } else {
-            alert("Failed to send promotion ❌");
-          }
-        } catch (error) {
-          console.error("Send WhatsApp Promotion Error:", error);
-          alert("Something went wrong. Please try again.");
-        }
-      };
+  const handleSendPromotion = async (garageId) => {
+    try {
+      //   const user = JSON.parse(localStorage.getItem("user")) || 'Hi User'; // if login info is stored
+      //   const phone = user?.phone || "+918461975062"; // fallback or prefilled number
+
+      const response = await axios.post("http://localhost:9002/api/garages/67f434837a547565f527cd98/notify", {
+        // phone,
+      });
+
+      if (response.status === 200) {
+        alert("Promotion sent via WhatsApp! ✅");
+      } else {
+        alert("Failed to send promotion ❌");
+      }
+    } catch (error) {
+      console.error("Send WhatsApp Promotion Error:", error);
+      alert("Something went wrong. Please try again.");
+    }
+  };
 
   const shareGarage = () => {
     if (navigator.share) {
@@ -135,7 +138,7 @@ const GarageDetail = () => {
   return (
     <div className="garage-container">
       <div className="garage-breadcrumb">
-        <Link to="/">Garages</Link> / <span>{garage.name}</span>
+        <Link to="/garageList">Garages</Link> / <span>{garage.name}</span>
       </div>
 
       <div className="garage-header-section">
@@ -149,16 +152,33 @@ const GarageDetail = () => {
             {garage.address || 'No address'} - Open until 10:00 pm · {garage.yearsInBusiness || '15'} Years in Business
           </div>
           <div className="garage-action-buttons">
-            {showNumber ? (
-              <p>📞 {garage.contact || "N/A"}</p>
-            ) : (
-              <button onClick={handleShowNumber} className="btn-show-number">
-                📞 (xxxxxxx890)
-              </button>
-            )}
+            <button
+              onClick={() => {
+                if (!user) {
+                  setIsLoginVisible(true);
+                }
+              }}
+              className="btn-show-number"
+            >
+              📞 {garage.contact
+                ? user
+                  ? garage.contact
+                  : `xxxxxxx${garage.contact.slice(-3)}`
+                : "N/A"}
+            </button>
 
             <button className="btn-best-deal">Best Deal</button>
-            <button className="btn-whatsapp" onClick={() => handleSendPromotion(garage._id)}>Send Enquiry</button>
+            <button
+              className="whatsapp-btn"
+              onClick={() => handleSendPromotion(garage._id)}
+            >
+              <img
+                src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg"
+                alt="WhatsApp"
+                style={{ width: '18px', height: '18px', marginRight: '6px', verticalAlign: 'middle' }}
+              />
+              Send Enquiry
+            </button>
           </div>
         </div>
       </div>

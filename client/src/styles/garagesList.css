@@ -1,0 +1,38 @@
+.btn-show-number {
+  background-color: #4f97da;
+  border: none;
+  padding: 6px 10px;
+  border-radius: 4px;
+  cursor: pointer;
+  display: inline-flex;
+  font-weight: bold;
+}
+
+.whatsapp-btn {
+  background-color: #3c9c5e; /* WhatsApp green */
+  color: rgb(27, 26, 26);
+  border: none;
+  padding: 8px 12px;
+  border-radius: 6px;
+  font-size: 14px;
+  /* font-weight: bold; */
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  transition: background-color 0.3s ease;
+}
+
+.whatsapp-btn:hover {
+  background-color: #1ebe5b;
+}
+
+.btn-view-details{
+     background-color: #bb997d;
+  border: none;
+  padding: 6px 10px;
+  border-radius: 4px;
+  cursor: pointer;
+  display: inline-flex;
+  /* font-weight: bld;  */
+}

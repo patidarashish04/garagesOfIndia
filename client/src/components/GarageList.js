@@ -3,6 +3,8 @@ import React, { useState, useEffect, useContext } from "react";
 import { AuthContext } from '../context/AuthContext';
 import { useNavigate } from "react-router-dom";
 import GarageListApiCall from "../api/garageListApi"
+import "../styles/garagesList.css"; // Import the CSS for styling
+
 
 
 const GarageList = () => {
@@ -16,7 +18,17 @@ const GarageList = () => {
     const [filteredGarages, setFilteredGarages] = useState([]);
     const navigate = useNavigate(); // for navigation
     const [garageData, setGarageData] = useState([]);
+    const [showNumber, setShowNumber] = useState(false);
 
+
+
+    const handleShowNumber = () => {
+        if (!user) {
+            setIsLoginVisible(true);
+            return;
+        }
+        setShowNumber(true);
+    };
     // Step 1: Ask for location once
     useEffect(() => {
         const locationData = localStorage.getItem("user_location");
@@ -24,45 +36,45 @@ const GarageList = () => {
         const askLocation = async () => {
             const confirmLocation = window.confirm("This app needs your location to add the garage. Allow access?");
             if (!confirmLocation) return;
-        
+
             if (!navigator.geolocation) {
                 alert("Geolocation is not supported by this browser.");
                 return;
             }
-        
+
             try {
                 const position = await new Promise((resolve, reject) => {
                     navigator.geolocation.getCurrentPosition(resolve, reject);
                 });
-        
+
                 const { latitude, longitude } = position.coords;
                 setLatitude(latitude);
                 setLongitude(longitude);
-                localStorage.setItem("user_location", JSON.stringify({ lat: latitude, long:longitude }));
+                localStorage.setItem("user_location", JSON.stringify({ lat: latitude, long: longitude }));
             } catch (error) {
                 console.error("Error getting location:", error);
                 alert("Location access is required to add a garage.");
             }
         };
 
-        
+
         let location = null;
         if (locationData) {
-          try {
-            const parsed = JSON.parse(locationData);
-            if (parsed?.lat && parsed?.long) {
-              location = parsed;
-              setLatitude(parsed?.lat);
-              setLongitude(parsed?.long);
+            try {
+                const parsed = JSON.parse(locationData);
+                if (parsed?.lat && parsed?.long) {
+                    location = parsed;
+                    setLatitude(parsed?.lat);
+                    setLongitude(parsed?.long);
+                }
+            } catch (e) {
+                console.error("Invalid location data", e);
             }
-          } catch (e) {
-            console.error("Invalid location data", e);
-          }
         }
-      
+
         if (!location) {
-          // Trigger popup logic here
-          askLocation();
+            // Trigger popup logic here
+            askLocation();
         }
     }, []);
 
@@ -75,7 +87,7 @@ const GarageList = () => {
                     const data = await GarageListApiCall(latitude, longitude); // await result
                     setGarageData(data);               // update state
                     // console.log("API Data:", data);
-                    console.log("this is garage data : "+data)
+                    console.log("this is garage data : " + data)
                     setLoading(false);
                 } catch (error) {
                     console.log("Error fetching garage data");
@@ -145,35 +157,35 @@ const GarageList = () => {
 
     const handleViewDetails = (garageId) => {
         if (!user) {
-          setIsLoginVisible(true);  // Opens the same login popup from Header
-          return;
+            setIsLoginVisible(true);  // Opens the same login popup from Header
+            return;
         }
         navigate(`/garages/${garageId}`);
-      };
+    };
 
     const handleSendPromotion = async (garageId) => {
         if (!user) {
             setIsLoginVisible(true);
             return;
-          }
-        try {
-        //   const user = JSON.parse(localStorage.getItem("user")) || 'Hi User'; // if login info is stored
-        //   const phone = user?.phone || "+918461975062"; // fallback or prefilled number
-      
-          const response = await axios.post("http://localhost:9002/api/garages/67f434837a547565f527cd98/notify", {
-            // phone,
-          });
-      
-          if (response.status === 200) {
-            alert("Promotion sent via WhatsApp! ✅");
-          } else {
-            alert("Failed to send promotion ❌");
-          }
-        } catch (error) {
-          console.error("Send WhatsApp Promotion Error:", error);
-          alert("Something went wrong. Please try again.");
         }
-      };
+        try {
+            //   const user = JSON.parse(localStorage.getItem("user")) || 'Hi User'; // if login info is stored
+            //   const phone = user?.phone || "+918461975062"; // fallback or prefilled number
+
+            const response = await axios.post("http://localhost:9002/api/garages/67f434837a547565f527cd98/notify", {
+                // phone,
+            });
+
+            if (response.status === 200) {
+                alert("Promotion sent via WhatsApp! ✅");
+            } else {
+                alert("Failed to send promotion ❌");
+            }
+        } catch (error) {
+            console.error("Send WhatsApp Promotion Error:", error);
+            alert("Something went wrong. Please try again.");
+        }
+    };
 
     return (<div className="main-container">
         {/* Garage List */}
@@ -201,11 +213,32 @@ const GarageList = () => {
                                 <span className="badge popular"> Popular</span>
                             </p>
                             <div className="actions">
-                                <a href={`tel:${garage.contact}`} className="call-btn">
-                                    📞 {garage.contact || "N/A"}
-                                </a>
-                                <button onClick={() => handleViewDetails(garage._id)}>View Details</button>
-                                <button onClick={() => handleSendPromotion(garage._id)}>Send Enquiry</button>
+                                <button
+                                    onClick={() => {
+                                        if (!user) {
+                                            setIsLoginVisible(true);
+                                        }
+                                    }}
+                                    className="btn-show-number"
+                                >
+                                    📞 {garage.contact
+                                        ? user
+                                            ? garage.contact
+                                            : `xxxxxxx${garage.contact.slice(-3)}`
+                                        : "N/A"}
+                                </button>
+                                <button className="btn-view-details" onClick={() => handleViewDetails(garage._id)}>View Details</button>
+                                <button
+                                    className="whatsapp-btn"
+                                    onClick={() => handleSendPromotion(garage._id)}
+                                >
+                                    <img
+                                        src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg"
+                                        alt="WhatsApp"
+                                        style={{ width: '18px', height: '18px', marginRight: '6px', verticalAlign: 'middle' }}
+                                    />
+                                    Send Enquiry
+                                </button>
                             </div>
                         </div>
                     </div>
