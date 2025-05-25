@@ -163,7 +163,7 @@ exports.findGarages = (Model) =>
 
       const userLocation = {
         type: "Point",
-        coordinates: [lng, lat], // Longitude first, then latitude
+        coordinates: [lat, lng], // Longitude first, then latitude
       };
       // Fetch nearby garages
       const garages = await Model.aggregate([

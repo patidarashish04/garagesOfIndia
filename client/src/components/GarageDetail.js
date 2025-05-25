@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-import { useParams, Link } from 'react-router-dom';
+import { useNavigate, useParams, Link } from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import '../styles/GarageDetail.css';
 
@@ -14,6 +14,17 @@ const GarageDetail = () => {
   const [reviews, setReviews] = useState([]);
   const [newReview, setNewReview] = useState('');
   const [similarGarages, setSimilarGarages] = useState([]);
+  const [showNumber, setShowNumber] = useState(false);
+  const navigate = useNavigate();
+
+  const handleShowNumber = () => {
+    setShowNumber(true);
+  };
+
+  const handleViewDetails = (garageId) => {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+    navigate(`/garages/${garageId}`);
+  };
 
   useEffect(() => {
     // Fetch garage details
@@ -70,6 +81,41 @@ const GarageDetail = () => {
     }
   };
 
+  const [startIndex, setStartIndex] = useState(0);
+  const itemsPerPage = 4;
+
+  const handleNext = () => {
+    if (startIndex + itemsPerPage < similarGarages.length) {
+      setStartIndex(startIndex + itemsPerPage);
+    }
+  };
+
+  const handlePrev = () => {
+    if (startIndex > 0) {
+      setStartIndex(startIndex - itemsPerPage);
+    }
+  };
+
+    const handleSendPromotion = async (garageId) => {
+        try {
+        //   const user = JSON.parse(localStorage.getItem("user")) || 'Hi User'; // if login info is stored
+        //   const phone = user?.phone || "+918461975062"; // fallback or prefilled number
+      
+          const response = await axios.post("http://localhost:9002/api/garages/67f434837a547565f527cd98/notify", {
+            // phone,
+          });
+      
+          if (response.status === 200) {
+            alert("Promotion sent via WhatsApp! ✅");
+          } else {
+            alert("Failed to send promotion ❌");
+          }
+        } catch (error) {
+          console.error("Send WhatsApp Promotion Error:", error);
+          alert("Something went wrong. Please try again.");
+        }
+      };
+
   const shareGarage = () => {
     if (navigator.share) {
       navigator.share({
@@ -94,17 +140,25 @@ const GarageDetail = () => {
 
       <div className="garage-header-section">
         <div>
-          <h1 className="garage-name">{garage.name}</h1>
-          <div className="garage-rating">
-            {garage.rating || '4.1'}★ <span>| {garage.ratingCount || '11.0'} Ratings | Claimed</span>
+          <h1 className="garageDet-name">{garage.name}</h1>
+          <div className="garageHead-rating">
+            <span className="rating-badge">{garage.rating || '4.1'}★</span>
+            <span> | {garage.ratingCount || '11.0'} Ratings | Claimed</span>
           </div>
           <div className="garage-subtext">
-            {garage.address || 'No address'} - Open until 10:00 pm · {garage.yearsInBusiness || '25'} Years in Business
+            {garage.address || 'No address'} - Open until 10:00 pm · {garage.yearsInBusiness || '15'} Years in Business
           </div>
           <div className="garage-action-buttons">
-            <button className="btn-show-number">Show Number</button>
+            {showNumber ? (
+              <p>📞 {garage.contact || "N/A"}</p>
+            ) : (
+              <button onClick={handleShowNumber} className="btn-show-number">
+                📞 (xxxxxxx890)
+              </button>
+            )}
+
             <button className="btn-best-deal">Best Deal</button>
-            <button className="btn-whatsapp">WhatsApp</button>
+            <button className="btn-whatsapp" onClick={() => handleSendPromotion(garage._id)}>Send Enquiry</button>
           </div>
         </div>
       </div>
@@ -169,30 +223,47 @@ const GarageDetail = () => {
             {/* Update the similar garages section in the return statement */}
             {similarGarages.length > 0 && (
               <section className="similar-garages">
-                <h3>Also listed in</h3>
+                <h3>Similar Garages</h3>
+
+                {/* <div className="arrow-controls">
+                  <button onClick={handlePrev} disabled={startIndex === 0}>←</button>
+                  <button onClick={handleNext} disabled={startIndex + itemsPerPage >= similarGarages.length}>→</button>
+                </div> */}
+
                 <div className="garages-scroll">
-                  {similarGarages.map((garage) => (
-                    <div key={garage._id} className="garage-card">
-                      <h4>{garage.name}</h4>
-                      <img
-                        src={garage.photos[0] || "https://storage.googleapis.com/bkt-gobumper-prod-web-app-static/offers-imgs/car-repair"}
-                        className="img-fluid rounded-start garage-image"
-                        alt={garage.name || "Garage"}
-                      />
-                      <div className="garage-rating">
-                        {garage.rating || '4.0'}★ ({garage.ratingCount || '10'} Ratings)
+                  {similarGarages
+                    .slice(startIndex, startIndex + itemsPerPage)
+                    .map((garage) => (
+                      <div
+                        key={garage._id}
+                        className="garageDet-card"
+                        onClick={() => handleViewDetails(garage._id)}
+                        style={{ cursor: 'pointer' }}
+                      >
+                        <h4>{garage.name}</h4>
+                        <img
+                          src={
+                            garage.photos[0] ||
+                            "https://storage.googleapis.com/bkt-gobumper-prod-web-app-static/offers-imgs/car-repair"
+                          }
+                          className="img-fluid rounded-start garage-image"
+                          alt={garage.name || "Garage"}
+                        />
+                        <div className="garage-rating">
+                          {garage.rating || "4.0"}★ ({garage.ratingCount || "10"} Ratings)
+                        </div>
+                        <p className="garage-address">{garage.address || "No address"}</p>
                       </div>
-                      <p className="garage-address">{garage.address || 'No address'}</p>
-                    </div>
-                  ))}
+                    ))}
                 </div>
               </section>
             )}
 
+
             {/* Products Section */}
             <section id="products" className="content-section">
               <h2>Products</h2>
-              <p>Products content coming soon</p>
+              <p>We’re excited to soon bring you a comprehensive list of products and services offered by this garage. From routine vehicle maintenance items to specialized repair tools and car care products, this section will showcase everything available to keep your vehicle in top condition.</p>
             </section>
 
             {/* Photos Section */}
