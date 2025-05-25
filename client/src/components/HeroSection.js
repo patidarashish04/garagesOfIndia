@@ -8,10 +8,13 @@ const HeroSection = () => {
   const navigate = useNavigate();
 
   const handleSearch = () => {
-    // Redirect to /search/yourQuery so that the SearchResults component can load the results
-    if (searchQuery.trim()) {
-      navigate(`/search/${encodeURIComponent(searchQuery.trim())}`);
-    }
+    // // Redirect to /search/yourQuery so that the SearchResults component can load the results
+    // if (searchQuery.trim()) {
+    //   navigate(`/search/${encodeURIComponent(searchQuery.trim())}`);
+    // }
+
+    //redirecting \
+    navigate('/garagelist')
   };
 
   return (

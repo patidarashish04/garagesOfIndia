@@ -19,6 +19,8 @@ const GarageList = () => {
 
     // Step 1: Ask for location once
     useEffect(() => {
+        const locationData = localStorage.getItem("user_location");
+
         const askLocation = async () => {
             const confirmLocation = window.confirm("This app needs your location to add the garage. Allow access?");
             if (!confirmLocation) return;
@@ -36,13 +38,32 @@ const GarageList = () => {
                 const { latitude, longitude } = position.coords;
                 setLatitude(latitude);
                 setLongitude(longitude);
+                localStorage.setItem("user_location", JSON.stringify({ lat: latitude, long:longitude }));
             } catch (error) {
                 console.error("Error getting location:", error);
                 alert("Location access is required to add a garage.");
             }
         };
 
-        askLocation();
+        
+        let location = null;
+        if (locationData) {
+          try {
+            const parsed = JSON.parse(locationData);
+            if (parsed?.lat && parsed?.long) {
+              location = parsed;
+              setLatitude(parsed?.lat);
+              setLongitude(parsed?.long);
+            }
+          } catch (e) {
+            console.error("Invalid location data", e);
+          }
+        }
+      
+        if (!location) {
+          // Trigger popup logic here
+          askLocation();
+        }
     }, []);
 
     useEffect(() => {
