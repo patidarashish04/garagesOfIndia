@@ -38,7 +38,6 @@ exports.notifyGarageOwner = catchAsync(async (req, res, next) => {
 
   // Garage owner's WhatsApp number
   const ownerPhone = garage.contact; 
-  console.log('Garage owner has no WhatsApp number ', ownerPhone )
   if (!ownerPhone) return next(new AppError("Garage owner has no WhatsApp number", 400));
 
   // Send WhatsApp message
