@@ -1,56 +1,612 @@
-/* src/components/GarageDetail.css */
+/* GarageDetail.css */
+.garage-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+  color: #333;
+  font-size: 16px;
+}
 
-/* Container styling */
-.container {
-    background-color: #f8f9fa;
-    padding: 2rem;
-    border-radius: 5px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.05);
+.garage-breadcrumb {
+  font-size: 16px;
+  margin-bottom: 20px;
+  color: #666;
+}
+
+.garage-breadcrumb a {
+  color: #0066cc;
+  text-decoration: none;
+}
+
+.garage-header-section {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 30px;
+  border-bottom: 1px solid #eee;
+  padding-bottom: 20px;
+}
+
+.garageDet-name {
+  font-weight: bold;
+  margin-bottom: 8px;
+  color: #020203f8;
+  font-size: 0px;
+}
+
+.garage-rating span {
+  color: #666;
+  font-size: 16px;
+  /* Increased from 14px */
+}
+
+.garage-subtext {
+  font-size: 16px;
+  /* Increased from 14px */
+  color: #110b0bc2;
+  margin-bottom: 20px;
+}
+
+.garage-action-buttons {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.btn-show-number,
+.btn-best-deal,
+.btn-whatsapp {
+  padding: 10px 18px;
+  border: none;
+  border-radius: 4px;
+  font-weight: bold;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+.btn-show-number {
+  background-color: #4f97da;
+  border: none;
+  padding: 6px 115px;
+  border-radius: 4px;
+  cursor: pointer;
+  display: inline-flex;
+  font-weight: bold;
+  font-size: 14px;
+}
+
+.btn-best-deal {
+  background-color: #ff9529;
+  color: rgb(12, 11, 11);
+  font-size: 14px;
+}
+
+/* .btn-whatsapp {
+  background-color: #25D366;
+  color: white;
+} */
+
+.whatsapp-btn {
+  background-color: #3c9c5e; /* WhatsApp green */
+  color: rgb(27, 26, 26);
+  border: none;
+  padding: 8px 12px;
+  border-radius: 6px;
+  font-size: 14px;
+  font-weight: bold;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  transition: background-color 0.3s ease;
+}
+
+.whatsapp-btn:hover {
+  background-color: #1ebe5b;
+}
+
+.main-content-wrapper {
+  display: flex;
+  gap: 30px;
+}
+
+.left-content {
+  flex: -12;
+}
+
+.right-content {
+  flex: 5;
+}
+
+.garage-tabs {
+  display: flex;
+  list-style: none;
+  padding: 0;
+  margin: 0 0 20px 0;
+  border-bottom: 1px solid #ddd;
+}
+
+.garage-tabs li {
+  padding: 12px 18px;
+  /* Larger padding */
+  cursor: pointer;
+  font-size: 16px;
+  /* Increased */
+  color: #666;
+}
+
+.garage-tabs li.active {
+  color: #0066cc;
+  border-bottom: 2px solid #0066cc;
+  font-weight: bold;
+}
+
+.content-sections {
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+}
+
+.content-section {
+  scroll-margin-top: 20px;
+  /* For smooth scrolling */
+}
+
+.content-section h2 {
+  font-size: 24px;
+  /* Larger heading */
+  margin-bottom: 15px;
+  color: #222;
+}
+
+.services-section h1 {
+  font-size: 20px;
+  margin-bottom: 10px;
+}
+
+.services-list {
+  list-style-type: none;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 10px;
+}
+
+.services-list li {
+  padding: 8px 0;
+  font-size: 16px;
+}
+
+.garage-card .garage-rating {
+  font-size: 14px;
+  color: #ff9529;
+  margin-bottom: 8px;
+}
+
+.garage-card .garage-address {
+  font-size: 14px;
+  color: #666;
+  margin: 0;
+}
+
+/* Photos Section */
+.photo-gallery {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 15px;
+  margin-bottom: 20px;
+}
+
+.garage-photo {
+  width: 100%;
+  height: 150px;
+  /* Slightly larger */
+  object-fit: cover;
+  border-radius: 4px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.no-photos {
+  grid-column: 1 / -1;
+  text-align: center;
+  padding: 40px;
+  color: #666;
+  background-color: #f9f9f9;
+  border-radius: 4px;
+}
+
+.btn-upload {
+  display: inline-block;
+  padding: 10px 18px;
+  background-color: #f0f0f0;
+  color: #333;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 16px;
+  transition: background-color 0.2s;
+}
+
+.btn-upload:hover {
+  background-color: #e0e0e0;
+}
+
+/* Reviews Section */
+.rating-input {
+  background-color: #f9f9f9;
+  padding: 20px;
+  border-radius: 4px;
+  margin-bottom: 30px;
+}
+
+.rating-input h3 {
+  margin-top: 0;
+  margin-bottom: 15px;
+  font-size: 18px;
+}
+
+.star-rating {
+  margin-bottom: 15px;
+}
+
+.star {
+  font-size: 28px;
+  /* Larger stars */
+  cursor: pointer;
+  color: #ccc;
+  margin-right: 5px;
+}
+
+.star.filled {
+  color: #ff9529;
+}
+
+.review-textarea {
+  width: 100%;
+  padding: 12px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  min-height: 120px;
+  margin-bottom: 15px;
+  resize: vertical;
+  font-size: 16px;
+}
+
+.submit-review {
+  background-color: #519de9;
+  color: white;
+  border: none;
+  padding: 10px 18px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-weight: bold;
+  font-size: 16px;
+}
+
+.reviews-list h3 {
+  font-size: 20px;
+  margin-bottom: 15px;
+  color: #222222;
+}
+
+.review-item {
+  padding: 15px 0;
+  border-bottom: 1px solid #eee;
+  color: #ff9529;
+  font-size: 16px
+}
+
+.review-header {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 8px;
+}
+
+.reviewer-name {
+  font-weight: bold;
+  font-size: 16px;
+  color: #222222;
+}
+
+.review-text {
+  margin: 8px 0;
+  line-height: 1.5;
+  font-size: 16px;
+}
+
+.review-date {
+  font-size: 14px;
+  color: #666;
+}
+
+/* Section Boxes */
+.contact-box {
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  padding: 50px;
+  margin-bottom: 1020px;
+  background: white;
+  right: 20%;
+}
+
+.contact-box h4 {
+  margin-top: 0;
+  margin-bottom: 20px;
+  font-size: 20px;
+}
+
+.contact-box p {
+  margin: 12px 0;
+  display: flexbox;
+  align-items: center;
+  gap: 8px;
+  font-size: 16px;
+}
+
+.btn-get-directions {
+  width: 100%;
+  padding: 10px;
+  background-color: #519de9;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  margin: 12px 0;
+  cursor: pointer;
+  font-weight: bold;
+  font-size: 16px;
+}
+
+.open-status {
+  font-weight: bold;
+  color: #006400;
+  font-size: 16px;
+}
+
+.btn-link {
+  display: block;
+  width: 100%;
+  text-align: left;
+  background: none;
+  border: none;
+  padding: 10px 0;
+  color: #519de9;
+  cursor: pointer;
+  font-size: 16px;
+  margin: 6px 0;
+}
+
+.btn-link:hover {
+  text-decoration: underline;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .main-content-wrapper {
+    flex-direction: column;
   }
-  
-  /* Headings styling */
-  h1, h2, h3, h5 {
-    color: #343a40;
+
+  .photo-gallery {
+    grid-template-columns: repeat(2, 1fr);
   }
-  
-  /* Card styling */
-  .card {
-    margin-bottom: 1.5rem;
-    border: none;
-    border-radius: 10px;
-    overflow: hidden;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+
+  .contact-box {
+    position: static;
+    margin-top: 30px;
   }
-  
-  .card-body {
-    background-color: #fff;
+}
+
+@media (max-width: 480px) {
+  .garage-action-buttons {
+    flex-direction: column;
   }
-  
-  /* Image styling */
-  .img-fluid {
-    border-radius: 10px;
-    transition: transform 0.3s ease;
+
+  .photo-gallery {
+    grid-template-columns: 1fr;
   }
-  
-  .img-fluid:hover {
-    transform: scale(1.05);
+
+  .services-list {
+    grid-template-columns: 1fr;
   }
-  
-  /* Reviews */
-  .card-title {
-    font-weight: 600;
-    color: #007bff;
-  }
-  
-  .card-subtitle {
-    font-size: 0.9rem;
-    color: #6c757d;
-  }
-  
-  /* Map iframe styling */
-  .embed-responsive {
-    border: 1px solid #dee2e6;
-    border-radius: 10px;
-    overflow: hidden;
-  }
-  
+}
+
+/* Contact Box */
+/* .contact-box {
+  background-color: #fff;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 20px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  margin-top: 20px;
+} */
+
+.btn-contact {
+  width: 100%;
+  padding: 12px;
+  background-color: #519de9;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  margin: 10px 0;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 16px;
+}
+
+.address-section {
+  margin: 15px 0;
+  border-top: 1px solid #eee;
+  padding-top: 15px;
+}
+
+.address-header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 8px;
+}
+
+.btn-copy {
+  background: none;
+  border: none;
+  color: #0066cc;
+  cursor: pointer;
+  margin-left: auto;
+}
+
+.address-text {
+  font-size: 14px;
+  line-height: 1.5;
+  color: #666;
+  margin: 0;
+}
+
+.timing-section {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin: 15px 0;
+  padding: 15px 0;
+  border-top: 1px solid #eee;
+}
+
+.open-status {
+  color: #006400;
+  font-weight: bold;
+}
+
+.btn-suggest {
+  background: none;
+  border: none;
+  color: #0066cc;
+  cursor: pointer;
+  margin-left: auto;
+}
+
+.contact-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  border-top: 1px solid #eee;
+  padding-top: 15px;
+}
+
+.btn-contact-action {
+  background: none;
+  border: none;
+  color: #0066cc;
+  cursor: pointer;
+  text-align: left;
+  padding: 8px 0;
+  font-size: 14px;
+}
+
+.btn-contact-action:hover {
+  text-decoration: underline;
+}
+
+.also-listed {
+  margin-top: 20px;
+  padding-top: 15px;
+  border-top: 1px solid #eee;
+}
+
+.also-listed h5 {
+  margin: 0 0 10px 0;
+  color: #666;
+  font-size: 14px;
+}
+
+.listed-items {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  color: #666;
+  font-size: 14px;
+}
+
+/* Similar Garages Section */
+.similar-garages {
+  margin: 30px 0;
+  font-size: 18px;
+}
+
+.similar-garages h1 {
+  font-size: 18px;
+  color: #070505;
+  margin-bottom: 15px;
+}
+
+.garages-scroll {
+  display: flex;
+  overflow-x: auto;
+  gap: 15px;
+  padding-bottom: 10px;
+}
+
+.garageDet-card {
+  min-width: 280px;
+  border: 1px solid #eee;
+  border-radius: 8px;
+  padding: 15px;
+  background: #fff;
+  background-color: #fff;
+  overflow: hidden;
+  transition: transform0.3s ease;
+}
+
+.garageDet-card:hover {
+  transform: translateY(-5px);
+}
+
+.garageDet-card:hover {
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  cursor: pointer;
+}
+
+.garage-card h4 {
+  margin: 0 0 8px 0;
+  font-size: 16px;
+  color: #222;
+}
+
+.garageHead-rating {
+  color: #161814;
+  font-size: 18px;
+  margin-bottom: 8px;
+}
+
+.rating-badge {
+  background-color: #0a8a04; /* Green background */
+  color: white;
+  padding: 4px 8px;
+  border-radius: 6px;
+  font-weight: bold;
+  font-size: 14px;
+  display: inline-block;
+}
+
+
+.garage-address {
+  font-size: 14px;
+  color: #666;
+  margin: 0;
+}
+
+.arrow-controls {
+  display: flex;
+  justify-content: flex-end;
+  margin-bottom: 10px;
+}
+
+.arrow-controls button {
+  background-color: #eee;
+  border: none;
+  padding: 6px 10px;
+  margin-left: 5px;
+  font-size: 18px;
+  cursor: pointer;
+}
+
+.arrow-controls button:disabled {
+  cursor: not-allowed;
+  opacity: 0.5;
+}

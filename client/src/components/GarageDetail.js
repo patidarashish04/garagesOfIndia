@@ -104,7 +104,7 @@ const GarageDetail = () => {
       //   const user = JSON.parse(localStorage.getItem("user")) || 'Hi User'; // if login info is stored
       //   const phone = user?.phone || "+918461975062"; // fallback or prefilled number
 
-      const response = await axios.post(`http://localhost:9002/api/garages/${garageId}/notify`, {
+      const response = await axios.post(`http://localhost:9002/api/garages/${garageId}/notify`, { 
         // phone,
       });
 
@@ -395,7 +395,38 @@ const GarageDetail = () => {
               Gb Palya Road, Hongasandra-560068
             </p>
           </div>
-          <button className="btn-get-directions">Get Directions</button>
+        <button
+  className="btn-get-directions"
+  onClick={() => {
+    const coordinates = garage.location?.coordinates;
+    if (coordinates && coordinates.length === 2) {
+      const lat = coordinates[0]; // assumed [lat, lng]
+      const lng = coordinates[1];
+
+      if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(
+          (position) => {
+            const userLat = position.coords.latitude;
+            const userLng = position.coords.longitude;
+            const directionsUrl = `https://www.google.com/maps/dir/?api=1&origin=${userLat},${userLng}&destination=${lat},${lng}&travelmode=driving`;
+            window.open(directionsUrl, '_blank');
+          },
+          (error) => {
+            alert("Unable to access your location. Please allow location access.");
+          }
+        );
+      } else {
+        alert("Geolocation is not supported by your browser.");
+      }
+    } else {
+      alert("Garage location coordinates not available.");
+    }
+  }}
+>
+  Get Directions
+</button>
+
+
           <div className="timing-section">
             <span className="open-status">Open until 10:00 pm</span>
             <button className="btn-suggest">Suggest New Timings</button>
