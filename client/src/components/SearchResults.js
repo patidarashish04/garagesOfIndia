@@ -6,6 +6,7 @@ import "../styles/SearchResults.css";
 const SearchResults = () => {
   const { query } = useParams();
   const navigate = useNavigate();
+  const [selectedGarageId, setSelectedGarageId] = useState(null);
   const [garages, setGarages] = useState([]);
   const [loading, setLoading] = useState(true);
   const [filters, setFilters] = useState({

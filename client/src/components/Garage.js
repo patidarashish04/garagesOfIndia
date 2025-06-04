@@ -63,6 +63,11 @@ const GarageForm = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    //it should not be submitted without otp verification
+     if (!isOtpVerified) {
+    alert("Please verify OTP before submitting the form.");
+    return;
+  }
   
     // Ask for location permission when form is submitted
     const confirmLocation = window.confirm("This app needs your location to add the garage. Allow access?");
@@ -405,7 +410,14 @@ const GarageForm = () => {
      
 
 
-      <button type="submit">Add Garage</button>
+      <button
+  type="submit"
+  disabled={!isOtpVerified}
+  title={!isOtpVerified ? "Please verify OTP first" : ""}
+  className={`submit-btn ${!isOtpVerified ? "disabled" : ""}`}
+>
+  Add Garage
+</button>
       <br />
       {/* <button type="button" className="geo-btn" onClick={handleShowLocation}>
         Show User Location
