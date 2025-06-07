@@ -19,33 +19,34 @@ const GarageDetail = () => {
   const navigate = useNavigate();
   const { user, setIsLoginVisible } = useContext(AuthContext);
 
-
   const handleShowNumber = () => {
     setShowNumber(true);
   };
 
   const handleViewDetails = (garageId) => {
-    window.scrollTo({ top: 0, behavior: "smooth" });
+    window.scrollTo({ top: 0, behavior: 'smooth' });
     navigate(`/garages/${garageId}`);
   };
 
   useEffect(() => {
     // Fetch garage details
-    axios.get(`http://localhost:9002/api/garages/${id}`)
-      .then(response => {
+    axios
+      .get(`http://localhost:9002/api/garages/${id}`)
+      .then((response) => {
         const data = response.data.data.data;
         setGarage(data);
         setPhotos(data.photos || []);
         setReviews(data.reviews || []);
       })
-      .catch(error => console.error('Error fetching garage details:', error));
+      .catch((error) => console.error('Error fetching garage details:', error));
 
     // Fetch similar garages (excluding current one)
-    axios.get(`http://localhost:9002/api/garages?exclude=${id}`)
-      .then(response => {
+    axios
+      .get(`http://localhost:9002/api/garages?exclude=${id}`)
+      .then((response) => {
         setSimilarGarages(response.data.data.data || []);
       })
-      .catch(error => console.error('Error fetching similar garages:', error));
+      .catch((error) => console.error('Error fetching similar garages:', error));
   }, [id]);
 
   const scrollToSection = (sectionId) => {
@@ -61,7 +62,7 @@ const GarageDetail = () => {
     if (file) {
       const reader = new FileReader();
       reader.onloadend = () => {
-        setPhotos(prev => [...prev, reader.result]);
+        setPhotos((prev) => [...prev, reader.result]);
       };
       reader.readAsDataURL(file);
     }
@@ -71,7 +72,7 @@ const GarageDetail = () => {
     try {
       await axios.post(`http://localhost:9002/api/garages/${id}/rate`, {
         rating: userRating,
-        review: newReview
+        review: newReview,
       });
       const response = await axios.get(`http://localhost:9002/api/garages/${id}`);
       setGarage(response.data.data.data);
@@ -109,26 +110,29 @@ const GarageDetail = () => {
       });
 
       if (response.status === 200) {
-        alert("Promotion sent via WhatsApp! ✅");
+        alert('Promotion sent via WhatsApp! ✅');
       } else {
-        alert("Failed to send promotion ❌");
+        alert('Failed to send promotion ❌');
       }
     } catch (error) {
-      console.error("Send WhatsApp Promotion Error:", error);
-      alert("Something went wrong. Please try again.");
+      console.error('Send WhatsApp Promotion Error:', error);
+      alert('Something went wrong. Please try again.');
     }
   };
 
   const shareGarage = () => {
     if (navigator.share) {
-      navigator.share({
-        title: garage.name,
-        text: `Check out ${garage.name} on our platform`,
-        url: window.location.href,
-      })
-        .catch(error => console.log('Error sharing:', error));
+      navigator
+        .share({
+          title: garage.name,
+          text: `Check out ${garage.name} on our platform`,
+          url: window.location.href,
+        })
+        .catch((error) => console.log('Error sharing:', error));
     } else {
-      const shareUrl = `mailto:?subject=${encodeURIComponent(garage.name)}&body=${encodeURIComponent(`Check out this garage: ${window.location.href}`)}`;
+      const shareUrl = `mailto:?subject=${encodeURIComponent(garage.name)}&body=${encodeURIComponent(
+        `Check out this garage: ${window.location.href}`
+      )}`;
       window.location.href = shareUrl;
     }
   };
@@ -160,18 +164,11 @@ const GarageDetail = () => {
               }}
               className="btn-show-number"
             >
-              📞 {garage.contact
-                ? user
-                  ? garage.contact
-                  : `xxxxxxx${garage.contact.slice(-3)}`
-                : "N/A"}
+              📞 {garage.contact ? (user ? garage.contact : `xxxxxxx${garage.contact.slice(-3)}`) : 'N/A'}
             </button>
 
             <button className="btn-best-deal">Best Deal</button>
-            <button
-              className="whatsapp-btn"
-              onClick={() => handleSendPromotion(garage._id)}
-            >
+            <button className="whatsapp-btn" onClick={() => handleSendPromotion(garage._id)}>
               <img
                 src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg"
                 alt="WhatsApp"
@@ -186,40 +183,22 @@ const GarageDetail = () => {
       <div className="main-content-wrapper">
         <div className="left-content">
           <ul className="garage-tabs">
-            <li
-              className={activeTab === 'overview' ? 'active' : ''}
-              onClick={() => scrollToSection('overview')}
-            >
+            <li className={activeTab === 'overview' ? 'active' : ''} onClick={() => scrollToSection('overview')}>
               Overview
             </li>
-            <li
-              className={activeTab === 'products' ? 'active' : ''}
-              onClick={() => scrollToSection('products')}
-            >
+            <li className={activeTab === 'products' ? 'active' : ''} onClick={() => scrollToSection('products')}>
               Products
             </li>
-            <li
-              className={activeTab === 'photos' ? 'active' : ''}
-              onClick={() => scrollToSection('photos')}
-            >
+            <li className={activeTab === 'photos' ? 'active' : ''} onClick={() => scrollToSection('photos')}>
               Photos
             </li>
-            <li
-              className={activeTab === 'price-list' ? 'active' : ''}
-              onClick={() => scrollToSection('price-list')}
-            >
+            <li className={activeTab === 'price-list' ? 'active' : ''} onClick={() => scrollToSection('price-list')}>
               Price List
             </li>
-            <li
-              className={activeTab === 'quick-info' ? 'active' : ''}
-              onClick={() => scrollToSection('quick-info')}
-            >
+            <li className={activeTab === 'quick-info' ? 'active' : ''} onClick={() => scrollToSection('quick-info')}>
               Quick Info
             </li>
-            <li
-              className={activeTab === 'reviews' ? 'active' : ''}
-              onClick={() => scrollToSection('reviews')}
-            >
+            <li className={activeTab === 'reviews' ? 'active' : ''} onClick={() => scrollToSection('reviews')}>
               Reviews
             </li>
           </ul>
@@ -228,7 +207,10 @@ const GarageDetail = () => {
             {/* Overview Section */}
             <section id="overview" className="content-section">
               <h2>Overview</h2>
-              <p>Welcome to {garage.name}. We provide quality service with {garage.yearsInBusiness || '25'} years of experience.</p>
+              <p>
+                Welcome to {garage.name}. We provide quality service with {garage.yearsInBusiness || '25'} years of
+                experience.
+              </p>
 
               <div className="services-section">
                 <h3>Services</h3>
@@ -251,39 +233,40 @@ const GarageDetail = () => {
                 </div> */}
 
                 <div className="garages-scroll">
-                  {similarGarages
-                    .slice(startIndex, startIndex + itemsPerPage)
-                    .map((garage) => (
-                      <div
-                        key={garage._id}
-                        className="garageDet-card"
-                        onClick={() => handleViewDetails(garage._id)}
-                        style={{ cursor: 'pointer' }}
-                      >
-                        <h4>{garage.name}</h4>
-                        <img
-                          src={
-                            garage.photos[0] ||
-                            "https://storage.googleapis.com/bkt-gobumper-prod-web-app-static/offers-imgs/car-repair"
-                          }
-                          className="img-fluid rounded-start garage-image"
-                          alt={garage.name || "Garage"}
-                        />
-                        <div className="garage-rating">
-                          {garage.rating || "4.0"}★ ({garage.ratingCount || "10"} Ratings)
-                        </div>
-                        <p className="garage-address">{garage.address || "No address"}</p>
+                  {similarGarages.slice(startIndex, startIndex + itemsPerPage).map((garage) => (
+                    <div
+                      key={garage._id}
+                      className="garageDet-card"
+                      onClick={() => handleViewDetails(garage._id)}
+                      style={{ cursor: 'pointer' }}
+                    >
+                      <h4>{garage.name}</h4>
+                      <img
+                        src={
+                          garage.photos[0] ||
+                          'https://storage.googleapis.com/bkt-gobumper-prod-web-app-static/offers-imgs/car-repair'
+                        }
+                        className="img-fluid rounded-start garage-image"
+                        alt={garage.name || 'Garage'}
+                      />
+                      <div className="garage-rating">
+                        {garage.rating || '4.0'}★ ({garage.ratingCount || '10'} Ratings)
                       </div>
-                    ))}
+                      <p className="garage-address">{garage.address || 'No address'}</p>
+                    </div>
+                  ))}
                 </div>
               </section>
             )}
 
-
             {/* Products Section */}
             <section id="products" className="content-section">
               <h2>Products</h2>
-              <p>We’re excited to soon bring you a comprehensive list of products and services offered by this garage. From routine vehicle maintenance items to specialized repair tools and car care products, this section will showcase everything available to keep your vehicle in top condition.</p>
+              <p>
+                We’re excited to soon bring you a comprehensive list of products and services offered by this garage. From
+                routine vehicle maintenance items to specialized repair tools and car care products, this section will
+                showcase everything available to keep your vehicle in top condition.
+              </p>
             </section>
 
             {/* Photos Section */}
@@ -316,7 +299,11 @@ const GarageDetail = () => {
               <p className="description">
                 {garage.description || 'No description available.'}
                 {garage.description && garage.description.length < 200 && (
-                  <span> Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam auctor, nisl eget ultricies tincidunt, nisl nisl aliquam nisl, eget ultricies nisl nisl eget nisl.</span>
+                  <span>
+                    {' '}
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam auctor, nisl eget ultricies tincidunt,
+                    nisl nisl aliquam nisl, eget ultricies nisl nisl eget nisl.
+                  </span>
                 )}
               </p>
             </section>
@@ -391,11 +378,42 @@ const GarageDetail = () => {
               <button className="btn-copy">Copy</button>
             </div>
             <p className="address-text">
-              Ground Floor, No.2, Near Oxford School,<br />
+              Ground Floor, No.2, Near Oxford School,
+              <br />
               Gb Palya Road, Hongasandra-560068
             </p>
           </div>
-          <button className="btn-get-directions">Get Directions</button>
+          <button
+            className="btn-get-directions"
+            onClick={() => {
+              const coordinates = garage.location?.coordinates;
+              if (coordinates && coordinates.length === 2) {
+                const lat = coordinates[0]; // assumed [lat, lng]
+                const lng = coordinates[1];
+
+                if (navigator.geolocation) {
+                  navigator.geolocation.getCurrentPosition(
+                    (position) => {
+                      const userLat = position.coords.latitude;
+                      const userLng = position.coords.longitude;
+                      const directionsUrl = `https://www.google.com/maps/dir/?api=1&origin=${userLat},${userLng}&destination=${lat},${lng}&travelmode=driving`;
+                      window.open(directionsUrl, '_blank');
+                    },
+                    (error) => {
+                      alert('Unable to access your location. Please allow location access.');
+                    }
+                  );
+                } else {
+                  alert('Geolocation is not supported by your browser.');
+                }
+              } else {
+                alert('Garage location coordinates not available.');
+              }
+            }}
+          >
+            Get Directions
+          </button>
+
           <div className="timing-section">
             <span className="open-status">Open until 10:00 pm</span>
             <button className="btn-suggest">Suggest New Timings</button>
